@@ -17,22 +17,22 @@ public class PersonalGoal
 		
 	}
 	
-	String getText () 
+	public String getText () 
 	{
 		return "NULL";
 	}
 	
-	boolean getImage () 
+	public boolean getImage () 
 	{
 		return true;
 	}
 	
-	boolean controlGoal (/*Library lib*/)
+	public boolean controlGoal (/*Library lib*/)
 	{
 		return true;
 	}
 	
-	void controlScoreTaken () 
+	public void controlScoreTaken () 
 	{
 		
 	}
