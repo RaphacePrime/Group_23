@@ -1,4 +1,4 @@
-Gioco
+Gioco brutto noioso
 
 - List<Tessera> tessere[122]
 - int numerogiocatore
