@@ -1,10 +1,16 @@
 package main;
 
+import java.util.Scanner;
+
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		System.out.print("Insert number of player: ");
+		Scanner sc = new Scanner(System.in);
+		int number_of_players=sc.nextInt();
+		System.out.println("Press ENTER key to start...");
+		Game game=new Game(number_of_players);
+		sc.close();
 	}
 
 }

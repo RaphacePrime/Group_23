@@ -31,6 +31,20 @@ public class Player {
 		
 	}
 	
+	public String getName()
+	{
+		return this.name;
+	}
+	public void setChair()
+	{
+		this.chair=true;
+	}
+	
+	public boolean getChair()
+	{
+		return this.chair;
+	}
+	
 	public void calculatePoints() {
 		
 	}
