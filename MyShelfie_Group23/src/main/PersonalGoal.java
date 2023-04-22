@@ -7,6 +7,8 @@ public class PersonalGoal
 	
 	private int id;
 	
+	private String matrix[][];
+	
 	private int scores_taken;
 	
 	private List <Integer> score;
@@ -17,17 +19,12 @@ public class PersonalGoal
 		
 	}
 	
-	public String getText () 
+	public void output () 
 	{
-		return "NULL";
+		
 	}
 	
-	public boolean getImage () 
-	{
-		return true;
-	}
-	
-	public boolean controlGoal (/*Library lib*/)
+	public boolean controlGoal (Library lib)
 	{
 		return true;
 	}

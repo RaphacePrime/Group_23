@@ -51,10 +51,9 @@ public class Game
 		
 	}
 	
-	public Card getCard()
+	public boolean getCard()
 	{
-		Card c=new Card();
-		return c;
+		return true;
 	}
 	
 	

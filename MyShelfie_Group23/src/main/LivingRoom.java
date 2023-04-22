@@ -6,17 +6,19 @@ public class LivingRoom {
 
 	private boolean end_card;
 	
-	public LivingRoom () 
-	{
-		
-	}
+	private int number_of_players;
 	
-	void countPlayers () 
+	public LivingRoom(int n)
 	{
 		
 	}
 	
 	void reset () 
+	{
+		
+	}
+	
+	void output()
 	{
 		
 	}

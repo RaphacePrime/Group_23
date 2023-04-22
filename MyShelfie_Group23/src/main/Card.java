@@ -8,22 +8,20 @@ public class Card {
 	
 	boolean used;
 	
-	public Card() {
+	public Card(String color, int id) {
 		
-		color = "";
-		used = false;
-		
-	}
-	
-	public boolean getImage() {
-		
-		boolean img = false;
-		
-		return img;
+		this.color = "";
+		this.used = false;
 		
 	}
 	
-	public String getColor() {
+	public void output() 
+	{
+		
+	}
+	
+	public String getColor() 
+	{
 		return this.color;
 	}
 	
@@ -31,20 +29,18 @@ public class Card {
 		return this.id;
 	}
 	
-	public boolean getUsed() {
+	public boolean getUsed() 
+	{
 		return this.used;
 	}
 	
-	public boolean setUsed() {
+	public void setUsed() {
 		
 		if(this.used == false) {
 			
 			this.used = true;
 		
 		}
-		
-		return this.used;
-		
 	}
 
 }
