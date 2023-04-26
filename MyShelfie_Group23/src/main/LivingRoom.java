@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+
 public class LivingRoom 
 {
 	
@@ -76,5 +78,20 @@ public class LivingRoom
 	public void setEnd_card(boolean end_card) 
 	{
 		this.end_card = end_card;
+	}
+
+	public Card getCard(int x, int y) {
+		// una funzione che date due coordinate mi ritorna una Card
+		return null;
+	}
+
+	public boolean controlChosenCards(ArrayList<Card> chosen) {
+		// controlla se è possibile prelevare le carte dentro la lista
+		return false;
+	}
+
+	public void removeCards(ArrayList<Card> chosen) {
+		// rimuove le carte dalla living room
+		
 	}
 }

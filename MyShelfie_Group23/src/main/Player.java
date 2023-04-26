@@ -42,9 +42,19 @@ public class Player {
 		this.chair=true;
 	}
 	
+	public Library getLibrary()
+	{
+		return this.library;
+	}
+	
 	public boolean getChair()
 	{
 		return this.chair;
+	}
+	
+	public int getPoints()
+	{
+		return this.points;
 	}
 	
 	public void setPersonalGoal(int id)
