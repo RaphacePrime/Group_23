@@ -1,5 +1,7 @@
 package main;
 
+import java.io.FileNotFoundException;
+
 public class Player {
 	
 	private String name;
@@ -43,6 +45,21 @@ public class Player {
 	public boolean getChair()
 	{
 		return this.chair;
+	}
+	
+	public void setPersonalGoal(int id)
+	{
+		try {
+			this.personalGoal= new PersonalGoal(id);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public PersonalGoal getPersonalGoal()
+	{
+		return this.personalGoal;
 	}
 	
 	public void calculatePoints() {
