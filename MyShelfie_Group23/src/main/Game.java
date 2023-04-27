@@ -56,30 +56,59 @@ public class Game
 	
 	public void turn()
 	{
-		int index_players=0;
+		int index_players=0;//varible to manage the turns
 		Scanner sc=new Scanner(System.in);
 		boolean control=true;
 		boolean exit=false;//variable for the last turns of players
 		while(control)
 		{
-			
-			this.chooseCard();
-			if(this.active_player.getLibrary().checkFullness())//check if the library is full for end the game
+			System.out.println("It's "+this.active_player.getName()+"'s turn!");
+			System.out.println("Select a option in the MENU': ");
+			System.out.println("1)Show the LIVING ROOM");
+			System.out.println("2)Show your LIBRARY");
+			System.out.println("3)Show the COMMON GOALS");
+			System.out.println("4)Show your PERSONAL GOALS");
+			System.out.println("5)Choose the cards from the LIVING ROOM and insert in LIBRARY");
+			System.out.print("Insert your choice: ");
+			int choice=sc.nextInt();
+			switch(choice)
 			{
-				exit=true;
+				case 1:
+					this.living_room.output();
+					break;
+				case 2:
+					this.active_player.getLibrary().output();
+					break;
+				case 3:
+					//show common goals
+					break;
+				case 4:
+					this.active_player.getPersonalGoal().output();
+					break;
+				case 5:
+					this.chooseCard();//entering the method where the player choose the cards
+					if(this.active_player.getLibrary().checkFullness())//check if the library is full for end the game
+					{
+						exit=true;
+					}
+					savePlayer();//saving the modification added to active_player
+					index_players++;//incrementing the index of array players
+					if(index_players==this.number_of_players)//when the player is the last player in the array, the next one will be in position 0 of the array
+					{
+						index_players=0;
+					}
+					nextPlayer();//switching active_player to next Player in array player
+					if(this.active_player.getChair()==true && exit==true)
+					{
+						control=false;//exit the game if the next player has the chair and someone completed the library
+					}
+					break;
+				default:
+					System.out.println("Choose one of the options in the menù!");
+					break;
 			}
-			savePlayer();//saving the modification added to active_player
-			index_players++;//incrementing the index of array players
-			if(index_players==this.number_of_players)//when the player is the last player in the array, the next one will be in position 0 of the array
-			{
-				index_players=0;
-			}
-			nextPlayer();//switching active_player to next Player in array player
-			if(this.active_player.getChair()==true && exit==true)
-			{
-				control=false;//exit the game if the next player has the chair and someone completed the library
-			}
-			
+			System.out.println("Press ENTER key to continue...");
+			sc.next();
 		}
 		endGame();
 		sc.close();
@@ -98,54 +127,63 @@ public class Game
 	
 	public void chooseCard()
 	{
+		// coordinates, direction, number of cards
 		ArrayList<Card> chosen = new ArrayList<Card>();//list for the choosen cards
-		System.out.print(this.active_player.getName()+", insert the amount of cards you want to pick(1,2,3) :");
 		Scanner sc=new Scanner(System.in);
-		int n_ofcards=sc.nextInt();//asking the player how many cards he want to pick
 		boolean control=false;
 		while(control==false)
 		{
+			//asking the cooredinates of the first card
+			System.out.println("Insert x coordinate of first card: ");
+			String sx=sc.nextLine(); int x=Integer.parseInt(sx);
+			System.out.println("Insert y coordinate of first card: ");
+			String sy=sc.nextLine(); int y=Integer.parseInt(sy);
+			System.out.println("Insert the direction of the next cards(N-E-S-W): ");
+			String direction=sc.nextLine();
+			while(direction!="N"&&direction!="S"&&direction!="W"&&direction!="E")
+			{
+				System.out.println("You must choose N or E or S or W");
+				direction=sc.nextLine();						
+			}
+			System.out.print(this.active_player.getName()+", insert the amount of cards you want to pick(1,2,3) :");
+			int n_ofcards=sc.nextInt();//asking the player how many cards he want to pick
 			while(n_ofcards<1 || n_ofcards>3)
 			{
 				System.out.print("You must select a number between 1 and 3: ");
 				n_ofcards=sc.nextInt();
 			}
-			for(int i=0; i<n_ofcards; i++)//input from the user
-			{
-				System.out.println("Insert x coordinate of "+i+1+" card: ");
-				int x=sc.nextInt();
-				System.out.println("Insert y coordinate of "+i+1+" card: ");
-				int y=sc.nextInt();
-				chosen.add(living_room.getCard(x,y));//adding to chosen the card selected
-			}
-			if(this.living_room.controlChosenCards(chosen))//if the control in livingroom permits picking the cards, they get removed from the table
+			if(this.living_room.controlChosenCards(x,y,direction, n_ofcards))//if the control in livingroom permits picking the cards, they get removed from the table
 			{
 				control=true;
-				this.living_room.removeCards(chosen);
+				chosen=this.living_room.getCards(x,y,direction, n_ofcards);//getting the cards from the living where
+				this.active_player.getLibrary().output();//output the player's library
+				System.out.print("Insert in which column you want to insert your "+chosen.size()+" new cards: ");
+				int column=sc.nextInt();//asking the player in which column he want to put the cards
+				while(this.active_player.getLibrary().insertInLibrary(chosen, column)==false)//while the player can't insert, the game ask another column
+				{
+					System.out.println("You can't insert in column "+column+", choose another one: ");
+					column=sc.nextInt();
+				}
 			}
 			else//user have to input again
 			{
 				System.out.println("Cards must be in order! Enter again the coordinates");
-				chosen.clear();//remove all the elements from the list
 			}
 		}
-		
 		sc.close();
 	}
 	
 	public void generateCards()
 	{
-		
-	}
-	
-	public boolean controlCommonGoals()
-	{
-		return true;
-	}
-	
-	public boolean controlPersonalGoal()
-	{
-		return true;
+		String colors[]= {"pink", "blue", "green", "cyan", "yellow", "white"};
+		for(int j=0; j<6; j++)
+		{
+			for(int i=0; i<22; i++)
+			{
+				Card t= new Card(colors[j], i);
+				this.cards.add(t);
+			}
+		}
 	}
 	
 	public void setPersonalGoal()//set 1 personal goal for each player
@@ -177,8 +215,9 @@ public class Game
 			System.out.println(players[y].getName()+"'s Personal Goal :");
 			players[y].getLibrary().output();
 			System.out.print("Press enter key to continue....");
-			
+			sc.next();
 		}
+		sc.close();
 	}
 	
 	public boolean getCard()

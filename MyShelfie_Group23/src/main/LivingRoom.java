@@ -85,13 +85,22 @@ public class LivingRoom
 		return null;
 	}
 
-	public boolean controlChosenCards(ArrayList<Card> chosen) {
-		// controlla se è possibile prelevare le carte dentro la lista
+	public void removeCards(ArrayList<Card> chosen) {
+		// rimuove le carte detnro chosen dalla living room
+		
+	}
+
+	public boolean controlChosenCards(int x, int y, String direction, int n_ofcards) {
+		// prende una carta, data la direzione scelta dall'utente (N-E-S-W) e il numero dic carte, restituisce true
+		// se l'utente può prenderle, false se non può
 		return false;
 	}
 
-	public void removeCards(ArrayList<Card> chosen) {
-		// rimuove le carte dalla living room
-		
+	public ArrayList<Card> getCards(int x, int y, String direction, int n_ofcards) {
+		ArrayList<Card> chosen= new ArrayList<Card>();
+		// prende una carta, data la direzione scelta dall'utente (N-E-S-W) e il numero dic carte, restituisce una ArrayList<Card>
+		// contenente le Card scelte dall'utente, e le rimuove chiamando la funzione
+		this.removeCards(chosen);
+		return chosen;
 	}
 }

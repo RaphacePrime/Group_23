@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+
 public class Library {
 	
 	private Card matrix[][];
@@ -14,9 +16,9 @@ public class Library {
 		return true;
 	}
 	
-	public void insertInLibrary(Card cards[], int x)
+	public boolean insertInLibrary(ArrayList<Card> chosen, int column)
 	{
-		
+		return true;
 	}
 
 	void output()
