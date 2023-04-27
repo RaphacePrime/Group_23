@@ -9,7 +9,9 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		int number_of_players=sc.nextInt();
 		System.out.println("Press ENTER key to start...");
+		sc.next();
 		Game game=new Game(number_of_players);
+		game.turn();
 		sc.close();
 	}
 
