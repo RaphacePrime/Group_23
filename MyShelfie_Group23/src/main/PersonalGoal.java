@@ -1,5 +1,4 @@
 package main;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -9,34 +8,36 @@ import java.util.Scanner;
 public class PersonalGoal 
 {
 	
-	private int id;
+	private int id; //id of the goal
 	
-	private String matrix[][];
+	private String matrix[][]; //matrix containing the color of the cards and the position they must have in the library
 
 	private List<String> fileContent; 
 	
-	private int points; //puteggio ottenuto per questo personalGoal
+	private int points; //Personal goal points made by a player
 	
-	private int[] score = {0,1,2,4,6,9,12}; //punteggio che si può ottenere in base a quante caselle sono state 
+	private int[] score = {0,1,2,4,6,9,12}; //Points a player gets by completing the goal
 	
-	
+ 
 	public PersonalGoal (int id) throws FileNotFoundException
 	{
 		this.id = id;
 		fileContent = new ArrayList<>();
-		matrix = new String[6][7];
+		matrix = new String[6][5];
 		createGoal();
 		points = 0;
 	}
 	
+	//Calculates the points made
+	
 	public void controlGoal (Library lib)
 	{
 		int boxCompleted = 0;
-		for(int x=0; x < 6; x++) {
+		for(int j=0; j < 5; j++) {
 			
-			for(int y = 0; y < 7; y++) {
+			for(int i = 0; i < 6; i++) {
 				
-				if(matrix[x][y] != null && matrix[x][y].equals("pink" /* lib.matrix[x][y].getColor() */)) {
+				if(matrix[i][j] != null && matrix[i][j].equals("pink" /* lib.matrix[i][j].getColor() */)) {
 					
 					boxCompleted++;
 					
@@ -51,9 +52,13 @@ public class PersonalGoal
 		return;
 	}
 	
+	//This function returns the points (To calculate the points, use the function controlGoal)
+	
 	public int GetPoints() {
 		return this.points;
 	}
+	
+	//This function reads the file and creates a list of string out of it
 	
 	public void readFile() throws FileNotFoundException {
 		
@@ -73,10 +78,12 @@ public class PersonalGoal
 		
 	}
 	
+	//This function ceates the goal from the file Personal_Goals.txt
+	
 	private void createGoal() throws FileNotFoundException {
 		
 		readFile();
-		int strRead = 0; // indica la stringa che sto leggendo del file in quel momento
+		int strRead = 0;
 		
 		for(String str: fileContent) {
 			
@@ -84,14 +91,14 @@ public class PersonalGoal
 			
 			if(strRead == id) {
 				
-				String[] posCard = str.split(";"); //Contains every single 
+				String[] posCard = str.split(";"); 
 				
 				for(int i = 0; i<posCard.length; i++) {
 					
-					String[] posCol = posCard[i].split(","); //Contains the position and the color of a single card
+					String[] posCol = posCard[i].split(",");
 					
-					int xAxis = Integer.parseInt(posCol[0]);
-					int yAxis = Integer.parseInt(posCol[1]);
+					int xAxis = Integer.parseInt(posCol[0])-1;
+					int yAxis = Integer.parseInt(posCol[1])-1;
 					String color = posCol[2];
 					
 					matrix[xAxis][yAxis] = color;
@@ -115,26 +122,54 @@ public class PersonalGoal
 				
 				if(matrix[x][y] != null){
 					s = s + "x: " +  x + ", y: " + y + ", color: " + matrix[x][y] + "\n";
+					
 				}
 				
 			}
 			
 		}
-		
 		return s;
 	}
 	
 	*/
+	
+	
+	//Grafic rapresentation of a goal
 
 	public void output () 
 	{
 		
-	}
-	
-
-	public void controlScoreTaken () 
-	{
+		for(int i=0; i < 6; i++) {
 			
+			for(int j =0; j < 5; j++) {
+				
+				if(matrix[i][j] == null){
+					
+					System.out.print("\u001B[30m" + "*\t" + "\u001B[0m");
+					
+				}else {
+					
+					if(matrix[i][j].equals("yellow")) {
+						System.out.print("\u001B[33m" + "*\t" + "\u001B[0m");
+					}else if(matrix[i][j].equals("pink")) {
+						System.out.print("\u001B[31m" + "*\t" + "\u001B[0m");
+					}else if(matrix[i][j].equals("blue")) {
+						System.out.print("\u001B[34m" + "*\t" + "\u001B[0m");
+					}else if(matrix[i][j].equals("green")) {
+						System.out.print("\u001B[32m" + "*\t" + "\u001B[0m");
+					}else if(matrix[i][j].equals("cyan")) {
+						System.out.print("\u001B[36m" + "*\t" + "\u001B[0m");
+					}else if(matrix[i][j].equals("white")) {
+						System.out.print("\u001B[37m" + "*\t" + "\u001B[0m");
+					}
+				}
+				
+			}
+			
+			System.out.print("\n");
+		}
+		
+		
 	}
 	
 }
