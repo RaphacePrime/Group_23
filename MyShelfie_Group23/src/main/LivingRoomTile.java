@@ -1,10 +1,13 @@
 package main;
 
-public class LivingRoomTile {
+public class LivingRoomTile 
+{
 	
 	private Card card;
 	
 	private boolean legalTile;
+	
+//	private boolean occupied;
 	
 	public LivingRoomTile () 
 	{
@@ -14,6 +17,7 @@ public class LivingRoomTile {
 	public LivingRoomTile (boolean legalTile) 
 	{
 		this.legalTile = legalTile;
+		this.card = null;
 	}
 	
 	public boolean isLegalTile() 
@@ -26,12 +30,41 @@ public class LivingRoomTile {
 		this.legalTile = legalTile;
 	}
 
-	public Card getCard() {
+/*	public boolean isOccupied()
+*	{
+*		return occupied;
+*	}
+*/
+	
+	public boolean isOccupied()
+	{
+		if (!this.isLegalTile())
+		{
+			return false;
+		}
+		else if (this.card != null)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public Card getCard()
+	{
 		return card;
 	}
 
-	public void setCard(Card card) {
+	public void setCard(Card card)
+	{
 		this.card = card;
 	}
-
+	
+/*	public void removeCard()
+*	{
+*		this.card = null;
+*	}
+*/
 }

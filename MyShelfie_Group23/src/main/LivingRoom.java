@@ -51,21 +51,70 @@ public class LivingRoom
 		}
 	}
 	
-	void reset () 
-	{
-		
-	}
-	
-	void output()
+	public void reset () 
 	{
 		for (int row = 0; row < 9; row++)
 		{
-			for (int column = 0; column < 9; column++)
+			for (LivingRoomTile tile : matrix[row])
 			{
-				//matrix[row][column].getLetter;
+				if (tile.isLegalTile())
+				{
+					//tile.setCard(null);
+					//tile.setOccupied();	
+				}
+			}
+		}
+	}
+	
+	public void output()
+	{
+		for (int row = 0; row < 9; row++)
+		{
+			for (LivingRoomTile tile : matrix[row])
+			{
+				//tile.getCard();
 				System.out.print("[ " + " ]  ");
 			}
 		}
+	}
+	
+	public boolean isRemovable(int x, int y)
+	{
+		if (matrix[x][y].getCard()==null)
+		{
+			return false;
+		}
+		else 
+		{
+			int neighbours = this.hasNeighbours(x, y);
+			if (neighbours > 0 && neighbours < 4)
+				return true;
+			else return false;
+		}
+	}
+	
+	public int hasNeighbours (int x, int y)
+	{
+		int neighbours = 0;
+		if (x != 0)
+			if (matrix[x-1][y].isOccupied())
+				neighbours++;
+		if (x != 8)
+			if (matrix[x+1][y].isOccupied())
+				neighbours++;
+		if (y != 0)
+			if (matrix[x][y-1].isOccupied())
+				neighbours++;
+		if (y != 8)
+			if (matrix[x][y+1].isOccupied())
+				neighbours++;
+		return neighbours;
+	}
+ 
+	
+	public void removeCard(int x, int y)
+	{
+		matrix[x][y].setCard(null);
 	}
 
 	public boolean getEnd_card() 
