@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ public class Game
 	
 	private int index_players;
 	
-	private Player players[];
+	private ArrayList<Player> players;
 	
 	private Player active_player;
 	
@@ -23,26 +24,20 @@ public class Game
 	public Game(int n)
 	{
 		Scanner sc= new Scanner(System.in);
-		this.cards= new ArrayList<Card>(); 
+		players = new ArrayList<Player>();
+		cards = new ArrayList<Card>(); 
+		number_of_players=n;
 		generateCards();//calling function to generate the 122 cards
-		this.cards.sort(null);//mixing the bag
-		this.number_of_players=n;
-		for(int i=0; i<this.number_of_players; i++)//creating players
-		{
-			System.out.print("Insert Player "+i+1+" name: ");
-			String name=sc.nextLine();
-			Player p= new Player(name, i);
-			this.players[i]=p;
-		}
-		this.setPersonalGoal();//calling the funtion to pick the personal goals
+		createPlayers();
+		setPersonalGoal();//calling the funtion to pick the personal goals
 		System.out.println("Press enter to randomly decide who get the chair and starts to play....");
-		sc.next();
+		sc.nextLine();
 		Random random = new Random();//deciding who starts
 		this.index_players = random.nextInt(this.number_of_players + 0) + 0;
-		this.players[this.index_players].setChair();//setting the chair to the player extracted randomly
-		System.out.println("The player that recive the chair is "+this.players[this.index_players].getName()+"!!!");
-		this.players[this.index_players]=this.active_player;//setting the active player
-		System.out.print("Press enter to extract 2 Common Goals....");sc.next();
+		this.players.get(this.index_players).setChair();//setting the chair to the player extracted randomly
+		System.out.println("The player that recive the chair is "+players.get(this.index_players).getName()+"!!!");
+		this.active_player=this.players.get(index_players);//setting the active player
+		System.out.print("Press enter to extract 2 Common Goals....");sc.nextLine();
 		int c2; int c1;
 		do 
 		{
@@ -51,6 +46,18 @@ public class Game
 		}while(c1==c2);
 		//insert in common_goals[] the goals extracted
 		this.living_room= new LivingRoom(this.number_of_players);
+		sc.close();
+	}
+	public void createPlayers()
+	{
+		Scanner sc= new Scanner(System.in);
+		for(int i=0; i<this.number_of_players; i++)//creating players
+		{
+			System.out.print("Insert Player "+(i+1)+" name: ");
+			String name=sc.nextLine();
+			Player p= new Player(name, i);
+			this.players.add(p);//adding the player created in the arrayList
+		}
 		sc.close();
 	}
 	
@@ -70,7 +77,8 @@ public class Game
 			System.out.println("4)Show your PERSONAL GOALS");
 			System.out.println("5)Choose the cards from the LIVING ROOM and insert in LIBRARY");
 			System.out.print("Insert your choice: ");
-			int choice=sc.nextInt();
+			String string_choice=sc.nextLine();
+			int choice=Integer.parseInt(string_choice);
 			switch(choice)
 			{
 				case 1:
@@ -108,7 +116,7 @@ public class Game
 					break;
 			}
 			System.out.println("Press ENTER key to continue...");
-			sc.next();
+			sc.nextLine();
 		}
 		endGame();
 		sc.close();
@@ -117,12 +125,12 @@ public class Game
 	}
 	public void savePlayer()//function to save in players array the modify added to active_player
 	{
-		this.players[index_players]=this.active_player;
+		this.players.set(index_players, active_player);
 	}
 	
 	public void nextPlayer()//switching active player to the next player
 	{
-		this.active_player=this.players[index_players];
+		this.active_player=this.players.get(index_players);
 	}
 	
 	public void chooseCard()
@@ -130,6 +138,7 @@ public class Game
 		// coordinates, direction, number of cards
 		ArrayList<Card> chosen = new ArrayList<Card>();//list for the choosen cards
 		Scanner sc=new Scanner(System.in);
+		Scanner scint= new Scanner(System.in);
 		boolean control=false;
 		while(control==false)
 		{
@@ -146,11 +155,11 @@ public class Game
 				direction=sc.nextLine();						
 			}
 			System.out.print(this.active_player.getName()+", insert the amount of cards you want to pick(1,2,3) :");
-			int n_ofcards=sc.nextInt();//asking the player how many cards he want to pick
+			int n_ofcards=scint.nextInt();//asking the player how many cards he want to pick
 			while(n_ofcards<1 || n_ofcards>3)
 			{
 				System.out.print("You must select a number between 1 and 3: ");
-				n_ofcards=sc.nextInt();
+				n_ofcards=scint.nextInt();
 			}
 			if(this.living_room.controlChosenCards(x,y,direction, n_ofcards))//if the control in livingroom permits picking the cards, they get removed from the table
 			{
@@ -158,11 +167,11 @@ public class Game
 				chosen=this.living_room.getCards(x,y,direction, n_ofcards);//getting the cards from the living where
 				this.active_player.getLibrary().output();//output the player's library
 				System.out.print("Insert in which column you want to insert your "+chosen.size()+" new cards: ");
-				int column=sc.nextInt();//asking the player in which column he want to put the cards
+				int column=scint.nextInt();//asking the player in which column he want to put the cards
 				while(this.active_player.getLibrary().insertInLibrary(chosen, column)==false)//while the player can't insert, the game ask another column
 				{
 					System.out.println("You can't insert in column "+column+", choose another one: ");
-					column=sc.nextInt();
+					column=scint.nextInt();
 				}
 			}
 			else//user have to input again
@@ -171,6 +180,7 @@ public class Game
 			}
 		}
 		sc.close();
+		scint.close();
 	}
 	
 	public void generateCards()
@@ -182,8 +192,14 @@ public class Game
 			{
 				Card t= new Card(colors[j], i);
 				this.cards.add(t);
+				System.out.println(t.getColor()+t.getID());
 			}
 		}
+		Collections.shuffle(cards);;//mixing the bags
+		/*for(int i=0; i<cards.size(); i++)
+		{
+			System.out.println(cards.get(i).getColor()+cards.get(i).getID());
+		}*/
 	}
 	
 	public void setPersonalGoal()//set 1 personal goal for each player
@@ -211,11 +227,11 @@ public class Game
 		}
 		for(int y=0; y<this.number_of_players; y++)
 		{
-			players[y].setPersonalGoal(generated_ids.get(y));//setting the personal goal to each player
-			System.out.println(players[y].getName()+"'s Personal Goal :");
-			players[y].getLibrary().output();
+			players.get(y).setPersonalGoal(generated_ids.get(y));//setting the personal goal to each player
+			System.out.println(players.get(y).getName()+"'s Personal Goal :");
+			players.get(y).getLibrary().output();
 			System.out.print("Press enter key to continue....");
-			sc.next();
+			sc.nextLine();
 		}
 		sc.close();
 	}
@@ -231,16 +247,16 @@ public class Game
 		Scanner sc= new Scanner(System.in);
 		for(int i=0; i<this.number_of_players; i++)
 		{
-			System.out.println(players[i].getName()+" totalized "+players[i].getPoints()+" points");
-			if(i==0) {max=players[i].getPoints();}
-			if(max<players[i].getPoints())
+			System.out.println(players.get(i).getName()+" totalized "+players.get(i).getPoints()+" points");
+			if(i==0) {max=players.get(i).getPoints();}
+			if(max<players.get(i).getPoints())
 			{
-				max=players[i].getPoints();
+				max=players.get(i).getPoints();
 				id=i;
 			}
 		}
-		System.out.print("Press enter to continue"); sc.next();
-		System.out.println("The WINNER is "+players[id].getName()+"!!!");
+		System.out.print("Press enter to continue"); sc.nextLine();
+		System.out.println("The WINNER is "+players.get(id).getName()+"!!!");
 		sc.close();
 	}
 	
