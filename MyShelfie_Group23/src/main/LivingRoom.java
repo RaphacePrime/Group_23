@@ -15,18 +15,18 @@ public class LivingRoom
 	//private int number_of_players;
 	
 	
-/* This constructor sets end_card as true and decides
+/** This constructor sets end_card as true and decides
  * whether each tile of the board is legal or illegal
  * depending on the number of players.
  * This constructor does not fill the board.
  */
-	public LivingRoom(int number_of_players)
+	public LivingRoom(int number_of_players, ArrayList<Card> cards)
 	{
 		this.end_card = true;
 		
 		this.matrix = new LivingRoomTile[9][9];
 		
-	/* the value of each element in initialization_matrix
+	/** the value of each element in initialization_matrix
 	 * represents the number of players required for that 
 	 * element to be a legal tile.
 	 * Elements with a value of 5 will never be legal tiles.
@@ -51,9 +51,10 @@ public class LivingRoom
 					matrix[row][column] = new LivingRoomTile(false);
 			}
 		}
+		this.reset(cards);
 	}
 	
-	public void reset () 
+	public void reset (ArrayList<Card> cards) 
 	{
 		for (int row = 0; row < 9; row++)
 		{
@@ -61,8 +62,8 @@ public class LivingRoom
 			{
 				if (tile.isLegalTile())
 				{
-					//tile.setCard(null);
-					//tile.setOccupied();	
+					tile.setCard(cards.remove(0));
+					//tile.isOccupied();	
 				}
 			}
 		}
@@ -80,7 +81,35 @@ public class LivingRoom
 		}
 	}
 	
-	public boolean isRemovable(int x, int y)
+	public boolean controlChosenCards(int x, int y, String direction, int n_of_cards)
+	{
+		int xAxisShift = 0;
+		int yAxisShift = 0;
+		switch (direction)
+		{
+		case "N":
+			yAxisShift = 1;
+			break;
+		case "S":
+			yAxisShift = -1;
+			break;
+		case "W":
+			xAxisShift = -1;
+			break;
+		case "E":
+			xAxisShift = 1;
+		}
+		for (int i=0; i < n_of_cards; i++)
+		{
+			if(!isRemovable(x + i*xAxisShift,y + i*yAxisShift))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private boolean isRemovable (int x, int y)
 	{
 		if (matrix[x][y].getCard()==null)
 		{
@@ -88,32 +117,63 @@ public class LivingRoom
 		}
 		else 
 		{
-			int neighbours = this.hasNeighbours(x, y);
+			int neighbours = 0;
+			if (x != 0) 
+			{
+				if (matrix[x - 1][y].isOccupied()) 
+				{
+					neighbours++;
+				}
+			}
+			if (x != 8) 
+			{
+				if (matrix[x + 1][y].isOccupied()) 
+				{
+					neighbours++;
+				}
+			}
+			if (y != 0)
+			{
+				if (matrix[x][y - 1].isOccupied()) 
+				{
+					neighbours++;
+				}
+			}
+			if (y != 8) 
+			{
+				if (matrix[x][y + 1].isOccupied())
+				{
+					neighbours++;
+				}
+			}
 			if (neighbours > 0 && neighbours < 4)
+			{
 				return true;
-			else return false;
+			}
+			else 
+			{
+				return false;
+			}
 		}
 	}
-	
-	public int hasNeighbours (int x, int y)
-	{
-		int neighbours = 0;
-		if (x != 0)
-			if (matrix[x-1][y].isOccupied())
-				neighbours++;
-		if (x != 8)
-			if (matrix[x+1][y].isOccupied())
-				neighbours++;
-		if (y != 0)
-			if (matrix[x][y-1].isOccupied())
-				neighbours++;
-		if (y != 8)
-			if (matrix[x][y+1].isOccupied())
-				neighbours++;
-		return neighbours;
-	}
- 
-	
+/*	private int hasNeighbours (int x, int y)
+*	{
+*		int neighbours = 0;
+*		if (x != 0)
+*			if (matrix[x-1][y].isOccupied())
+*				neighbours++;
+*		if (x != 8)
+*			if (matrix[x+1][y].isOccupied())
+*				neighbours++;
+*		if (y != 0)
+*			if (matrix[x][y-1].isOccupied())
+*				neighbours++;
+*		if (y != 8)
+*			if (matrix[x][y+1].isOccupied())
+*				neighbours++;
+*		return neighbours;
+*	}
+*/
 	public void removeCard(int x, int y)
 	{
 		matrix[x][y].setCard(null);
@@ -139,12 +199,13 @@ public class LivingRoom
 		
 	}
 
-	public boolean controlChosenCards(int x, int y, String direction, int n_ofcards) {
+/*	public boolean controlChosenCards(int x, int y, String direction, int n_ofcards) {
 		// prende una carta, data la direzione scelta dall'utente (N-E-S-W) e il numero dic carte, restituisce true
 		// se l'utente può prenderle, false se non può
 		return false;
 	}
-
+*/
+	
 	public ArrayList<Card> getCards(int x, int y, String direction, int n_ofcards) {
 		ArrayList<Card> chosen= new ArrayList<Card>();
 		// prende una carta, data la direzione scelta dall'utente (N-E-S-W) e il numero dic carte, restituisce una ArrayList<Card>
