@@ -10,7 +10,8 @@ public class Card {
 	
 	public Card(String color, int id) {
 		
-		this.color = "";
+		this.color = color;
+		this.id=id;
 		this.used = false;
 		
 	}
