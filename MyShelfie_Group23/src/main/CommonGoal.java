@@ -25,7 +25,7 @@ public class CommonGoal
 		return true;
 	}
 	
-	public boolean controlGoal(/*Library lib*/)
+	public boolean controlGoal(Library lib)
 	{
 		return true;
 	}
