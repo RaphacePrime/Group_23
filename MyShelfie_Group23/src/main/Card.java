@@ -8,9 +8,10 @@ public class Card {
 	
 	boolean used;
 	
-	public Card() {
+	public Card(int id,String color) {
 		
-		color = "";
+		this id = id;
+		this.color = color;
 		used = false;
 		
 	}
