@@ -69,6 +69,25 @@ public class LivingRoom
 		}
 	}
 	
+	public boolean checkReset()
+	{
+		for (int x = 0; x < 9; x++) 
+		{
+			for (int y = 0; y < 9; y++)
+			{
+				if (matrix[x][y].isOccupied())
+				{
+					int neighbours = hasNeighbours(x,y);
+					if (neighbours > 1)
+					{
+						return false;
+					}
+				}
+			}
+		}
+		return true;		
+	}
+	
 	public void output()
 	{
 		for (int row = 0; row < 9; row++)
@@ -76,7 +95,28 @@ public class LivingRoom
 			for (LivingRoomTile tile : matrix[row])
 			{
 				//tile.getCard();
-				System.out.print("[ " + " ]  ");
+				if(!tile.isOccupied())
+				{	
+					System.out.print("\u001B[30m" + "*\t" + "\u001B[0m");
+				}
+				else {
+					
+					String tileColor = new String();
+					tileColor = tile.getColor();
+					if(tileColor.equals("yellow")) {
+						System.out.print("\u001B[33m" + "*\t" + "\u001B[0m");
+					}else if(tileColor.equals("pink")) {
+						System.out.print("\u001B[31m" + "*\t" + "\u001B[0m");
+					}else if(tileColor.equals("blue")) {
+						System.out.print("\u001B[34m" + "*\t" + "\u001B[0m");
+					}else if(tileColor.equals("green")) {
+						System.out.print("\u001B[32m" + "*\t" + "\u001B[0m");
+					}else if(tileColor.equals("cyan")) {
+						System.out.print("\u001B[36m" + "*\t" + "\u001B[0m");
+					}else if(tileColor.equals("white")) {
+						System.out.print("\u001B[37m" + "*\t" + "\u001B[0m");
+					}
+				}
 			}
 		}
 	}
@@ -117,35 +157,7 @@ public class LivingRoom
 		}
 		else 
 		{
-			int neighbours = 0;
-			if (x != 0) 
-			{
-				if (matrix[x - 1][y].isOccupied()) 
-				{
-					neighbours++;
-				}
-			}
-			if (x != 8) 
-			{
-				if (matrix[x + 1][y].isOccupied()) 
-				{
-					neighbours++;
-				}
-			}
-			if (y != 0)
-			{
-				if (matrix[x][y - 1].isOccupied()) 
-				{
-					neighbours++;
-				}
-			}
-			if (y != 8) 
-			{
-				if (matrix[x][y + 1].isOccupied())
-				{
-					neighbours++;
-				}
-			}
+			int neighbours = hasNeighbours(x,y);
 			if (neighbours > 0 && neighbours < 4)
 			{
 				return true;
@@ -156,24 +168,43 @@ public class LivingRoom
 			}
 		}
 	}
-/*	private int hasNeighbours (int x, int y)
-*	{
-*		int neighbours = 0;
-*		if (x != 0)
-*			if (matrix[x-1][y].isOccupied())
-*				neighbours++;
-*		if (x != 8)
-*			if (matrix[x+1][y].isOccupied())
-*				neighbours++;
-*		if (y != 0)
-*			if (matrix[x][y-1].isOccupied())
-*				neighbours++;
-*		if (y != 8)
-*			if (matrix[x][y+1].isOccupied())
-*				neighbours++;
-*		return neighbours;
-*	}
-*/
+	
+	
+	private int hasNeighbours (int x, int y)
+	{
+		int neighbours = 0;
+		
+		if (x != 0) 
+		{
+			if (matrix[x - 1][y].isOccupied()) 
+			{
+				neighbours++;
+			}
+		}
+		if (x != 8) 
+		{
+			if (matrix[x + 1][y].isOccupied()) 
+			{
+				neighbours++;
+			}
+		}
+		if (y != 0)
+		{
+			if (matrix[x][y - 1].isOccupied()) 
+			{
+				neighbours++;
+			}
+		}
+		if (y != 8) 
+		{
+			if (matrix[x][y + 1].isOccupied())
+			{
+				neighbours++;
+			}
+		}
+		return neighbours;
+	}
+
 	public void removeCard(int x, int y)
 	{
 		matrix[x][y].setCard(null);

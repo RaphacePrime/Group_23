@@ -62,6 +62,11 @@ public class LivingRoomTile
 		this.card = card;
 	}
 	
+	public String getColor()
+	{
+		return this.card.getColor();
+	}
+	
 /*	public void removeCard()
 *	{
 *		this.card = null;
