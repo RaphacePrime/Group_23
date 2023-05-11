@@ -29,7 +29,7 @@ public class Game
 		number_of_players=n;
 		generateCards();//calling function to generate the 122 cards
 		createPlayers();
-		setPersonalGoal();//calling the funtion to pick the personal goals
+		setPersonalGoal();//calling the function to pick the personal goals
 		System.out.println("Press enter to randomly decide who get the chair and starts to play....");
 		sc.nextLine();
 		Random random = new Random();//deciding who starts
@@ -41,13 +41,14 @@ public class Game
 		int c2; int c1;
 		do 
 		{
-			c1 = random.nextInt(12+0)+1; //extrating number between 1-12 to decide which common goals are extracted
+			c1 = random.nextInt(12+0)+1; //extracting number between 1-12 to decide which common goals are extracted
 			c2 = random.nextInt(12+0)+1;
 		}while(c1==c2);
 		//insert in common_goals[] the goals extracted
-		this.living_room= new LivingRoom(this.number_of_players);
+		this.living_room= new LivingRoom(this.number_of_players, cards);
 		sc.close();
 	}
+	
 	public void createPlayers()
 	{
 		Scanner sc= new Scanner(System.in);
@@ -63,7 +64,7 @@ public class Game
 	
 	public void turn()
 	{
-		int index_players=0;//varible to manage the turns
+		int index_players=0;//variable to manage the turns
 		Scanner sc=new Scanner(System.in);
 		boolean control=true;
 		boolean exit=false;//variable for the last turns of players
@@ -118,11 +119,12 @@ public class Game
 			System.out.println("Press ENTER key to continue...");
 			sc.nextLine();
 		}
-		endGame();
+		endGame();// end the game 
 		sc.close();
 		//switch player
 		//end game only to player before the chair
 	}
+	
 	public void savePlayer()//function to save in players array the modify added to active_player
 	{
 		this.players.set(index_players, active_player);
@@ -136,13 +138,13 @@ public class Game
 	public void chooseCard()
 	{
 		// coordinates, direction, number of cards
-		ArrayList<Card> chosen = new ArrayList<Card>();//list for the choosen cards
+		ArrayList<Card> chosen = new ArrayList<Card>();//list for the chosen cards
 		Scanner sc=new Scanner(System.in);
 		Scanner scint= new Scanner(System.in);
 		boolean control=false;
 		while(control==false)
 		{
-			//asking the cooredinates of the first card
+			//asking the coordinates of the first card
 			System.out.println("Insert x coordinate of first card: ");
 			String sx=sc.nextLine(); int x=Integer.parseInt(sx);
 			System.out.println("Insert y coordinate of first card: ");
