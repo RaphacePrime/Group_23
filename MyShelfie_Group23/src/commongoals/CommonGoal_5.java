@@ -1,6 +1,6 @@
 package commongoals;
 
-import main.Player;
+import player.Player;
 
 public class CommonGoal_5 extends CommonGoal{
 

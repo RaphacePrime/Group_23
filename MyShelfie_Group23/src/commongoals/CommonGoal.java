@@ -2,7 +2,7 @@ package commongoals;
 
 import java.util.ArrayList;
 
-import main.Player;
+import player.Player;
 
 public abstract class CommonGoal 
 {

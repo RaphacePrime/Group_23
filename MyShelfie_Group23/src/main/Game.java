@@ -5,7 +5,10 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
+import board.Card;
+import board.LivingRoom;
 import commongoals.*;
+import player.Player;
 
 public class Game 
 {

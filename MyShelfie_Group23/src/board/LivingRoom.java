@@ -1,4 +1,4 @@
-package main;
+package board;
 
 import java.util.ArrayList;
 
@@ -7,14 +7,8 @@ public class LivingRoom
 	
 	//private Card matrix [][];
 	private LivingRoomTile matrix [][];
-
-	private boolean end_card;
 	
 	private ArrayList<Card> cards;
-	
-	//private boolean illegal_tile;
-	
-	//private int number_of_players;
 	
 	/**
 	 * This constructor decides whether each tile of the board 
@@ -25,7 +19,6 @@ public class LivingRoom
 	 */
 	public LivingRoom(int number_of_players, ArrayList<Card> cards)
 	{
-		this.end_card = true;
 		this.cards = cards;
 		
 		this.matrix = new LivingRoomTile[9][9];
@@ -214,16 +207,6 @@ public class LivingRoom
 	public void removeCard(int x, int y)
 	{
 		matrix[x][y].setCard(null);
-	}
-
-	public boolean getEnd_card() 
-	{
-		return end_card;
-	}
-
-	public void setEnd_card(boolean end_card) 
-	{
-		this.end_card = end_card;
 	}
 
 	public Card getCard(int x, int y) {

@@ -1,6 +1,8 @@
-package main;
+package player;
 
 import java.util.ArrayList;
+
+import board.Card;
 
 public class Library {
 	
@@ -21,7 +23,7 @@ public class Library {
 		return true;
 	}
 
-	void output()
+	public void output()
 	{
 		
 	}
