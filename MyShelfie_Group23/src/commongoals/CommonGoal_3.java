@@ -11,14 +11,13 @@ public class CommonGoal_3 extends CommonGoal{
 
 	@Override
 	public boolean checkGoal(Player player) {
-		// TODO Auto-generated method stub
+		Library library = player.getLibrary();
 		return false;
 	}
 
 	@Override
 	public void output() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Four cards of the same colour in the four corners of your library");
 	}
 
 }
