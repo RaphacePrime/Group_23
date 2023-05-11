@@ -27,4 +27,12 @@ public class Library {
 	{
 		
 	}
+
+	public Card[][] getMatrix() {
+		return matrix;
+	}
+
+	public void setMatrix(Card matrix[][]) {
+		this.matrix = matrix;
+	}
 }
