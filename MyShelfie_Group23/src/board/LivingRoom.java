@@ -48,6 +48,10 @@ public class LivingRoom
 	
 	public void reset () 
 	{
+		if (!this.checkReset()) {
+			return;
+		}
+		System.out.println("The board is being resetted...");
 		for (int row = 0; row < 9; row++)
 		{
 			for (LivingRoomTile tile : matrix[row])
@@ -60,7 +64,7 @@ public class LivingRoom
 		}
 	}
 	
-	public boolean checkReset()
+	private boolean checkReset()
 	{
 		for (int x = 0; x < 9; x++) 
 		{
@@ -218,16 +222,27 @@ public class LivingRoom
 		// rimuove le carte detnro chosen dalla living room
 		
 	}
-
-/*	public boolean controlChosenCards(int x, int y, String direction, int n_ofcards) {
-		// prende una carta, data la direzione scelta dall'utente (N-E-S-W) e il numero dic carte, restituisce true
-		// se l'utente può prenderle, false se non può
-		return false;
-	}
-*/
 	
 	public ArrayList<Card> getCards(int x, int y, String direction, int n_ofcards) {
+		int xAxisShift = 0;
+		int yAxisShift = 0;
 		ArrayList<Card> chosen= new ArrayList<Card>();
+		switch (direction)
+		{
+		case "N":
+			yAxisShift = 1;
+			break;
+		case "S":
+			yAxisShift = -1;
+			break;
+		case "W":
+			xAxisShift = -1;
+			break;
+		case "E":
+			xAxisShift = 1;
+		}
+		Card card = matrix[x][y].getCard();
+		chosen.add(card);
 		// prende una carta, data la direzione scelta dall'utente (N-E-S-W) e il numero dic carte, restituisce una ArrayList<Card>
 		// contenente le Card scelte dall'utente, e le rimuove chiamando la funzione
 		this.removeCards(chosen);

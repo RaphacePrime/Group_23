@@ -5,15 +5,8 @@ public class LivingRoomTile
 	
 	private Card card;
 	
-	private boolean legalTile;
+	private final boolean legalTile;
 	
-//	private boolean occupied;
-	
-	public LivingRoomTile () 
-	{
-		
-	}
-
 	public LivingRoomTile (boolean legalTile) 
 	{
 		this.legalTile = legalTile;
@@ -24,17 +17,6 @@ public class LivingRoomTile
 	{
 		return legalTile;
 	}
-
-	public void setLegalTile(boolean legalTile) 
-	{
-		this.legalTile = legalTile;
-	}
-
-/*	public boolean isOccupied()
-*	{
-*		return occupied;
-*	}
-*/
 	
 	public boolean isOccupied()
 	{
@@ -66,10 +48,4 @@ public class LivingRoomTile
 	{
 		return this.card.getColor();
 	}
-	
-/*	public void removeCard()
-*	{
-*		this.card = null;
-*	}
-*/
 }
