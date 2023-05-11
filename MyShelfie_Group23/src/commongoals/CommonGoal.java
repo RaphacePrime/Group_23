@@ -22,7 +22,7 @@ public abstract class CommonGoal
 	
 	public abstract void output();
 	
-	public boolean assignPoints(Player player)
+	public int assignPoints()
 	{
 		if(points.isEmpty())//if the list is empty, i don't need to assign points
 			//this control is better to do in the checkGoal(player) method, 
@@ -33,8 +33,9 @@ public abstract class CommonGoal
 		{
 			//player.addPoints();//adding points to the player
 			int points_to_assign=points.remove(0);
+			return points_to_assign;
 		}
-		return false;
+		return 0;
 	}
 	
 	

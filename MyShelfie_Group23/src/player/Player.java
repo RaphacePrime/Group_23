@@ -72,7 +72,12 @@ public class Player {
 	
 	public void setCheckCommonGoals(int n) //set check_commongoals[0] or check_commongoals[1] to true
 	{
-		this.check_commonGoals[n-1]=true;
+		this.check_commonGoals[n]=true;
+	}
+	
+	public boolean getCheckCommonGoals(int n)
+	{
+		return this.check_commonGoals[n];
 	}
 
 }
