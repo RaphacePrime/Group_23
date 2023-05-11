@@ -14,42 +14,36 @@ public class Player {
 	
 	private PersonalGoal personalGoal; 
 	
-	private boolean CommonGoals[];
+	private boolean check_commonGoals[];//check if goal 1 and goal 2 are completed
 	
 	private int points;
 	
-	public Player(String name, int id) {
-		
+	public Player(String name, int id) 
+	{
 		this.name = name;
 		this.id = id;
-		
-		if(this.id == 1) {
-			this.chair = true;
-		}else {
-			this.chair = false;
-		}
-		
-		this.points = 0;
-		
+		this.chair=false;
+		this.points = 0;	
 	}
 	
 	public String getName()
 	{
 		return this.name;
 	}
+	
 	public void setChair()
 	{
 		this.chair=true;
 	}
 	
-	public Library getLibrary()
-	{
-		return this.library;
-	}
-	
 	public boolean getChair()
 	{
 		return this.chair;
+	}
+	
+	public Library getLibrary()
+	{
+		return this.library;
 	}
 	
 	public int getPoints()
@@ -66,22 +60,19 @@ public class Player {
 			e.printStackTrace();
 		}
 	}
-	
 	public PersonalGoal getPersonalGoal()
 	{
 		return this.personalGoal;
 	}
 	
-	public void calculatePoints() {
-		
+	public void addPoints(int n) 
+	{
+		this.points+=n;
 	}
 	
-	public void setCommonGoals() {
-		
-	}
-	
-	public void insertInLibrary(Card c) {
-		
+	public void setCheckCommonGoals(int n) //set check_commongoals[0] or check_commongoals[1] to true
+	{
+		this.check_commonGoals[n-1]=true;
 	}
 
 }

@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
+import commongoals.*;
+
 public class Game 
 {
 	private ArrayList<Card> cards;
@@ -17,7 +19,7 @@ public class Game
 	
 	private Player active_player;
 	
-	//private CommonGoal common_goals[];
+	private CommonGoal common_goals[];
 	
 	private LivingRoom living_room;
 	
@@ -27,9 +29,11 @@ public class Game
 		players = new ArrayList<Player>();
 		cards = new ArrayList<Card>(); 
 		number_of_players=n;
+		common_goals= new CommonGoal[2];
 		generateCards();//calling function to generate the 122 cards
 		createPlayers();
 		setPersonalGoal();//calling the function to pick the personal goals
+		setCommonGoals();
 		System.out.println("Press enter to randomly decide who get the chair and starts to play....");
 		sc.nextLine();
 		Random random = new Random();//deciding who starts
@@ -38,17 +42,23 @@ public class Game
 		System.out.println("The player that recive the chair is "+players.get(this.index_players).getName()+"!!!");
 		this.active_player=this.players.get(index_players);//setting the active player
 		System.out.print("Press enter to extract 2 Common Goals....");sc.nextLine();
+		this.living_room= new LivingRoom(this.number_of_players, cards);
+		sc.close();
+	}
+	
+	private void setCommonGoals() 
+	{
+		Random random = new Random();//deciding who starts
 		int c2; int c1;
 		do 
 		{
 			c1 = random.nextInt(12+0)+1; //extracting number between 1-12 to decide which common goals are extracted
 			c2 = random.nextInt(12+0)+1;
 		}while(c1==c2);
-		//insert in common_goals[] the goals extracted
-		this.living_room= new LivingRoom(this.number_of_players, cards);
-		sc.close();
+		if(c1==1||c2==1) {CommonGoal c= new CommonGoal_1(1);}
+		
 	}
-	
+
 	public void createPlayers()
 	{
 		Scanner sc= new Scanner(System.in);
@@ -231,7 +241,7 @@ public class Game
 		{
 			players.get(y).setPersonalGoal(generated_ids.get(y));//setting the personal goal to each player
 			System.out.println(players.get(y).getName()+"'s Personal Goal :");
-			players.get(y).getLibrary().output();
+			players.get(y).getPersonalGoal().output();
 			System.out.print("Press enter key to continue....");
 			sc.nextLine();
 		}
