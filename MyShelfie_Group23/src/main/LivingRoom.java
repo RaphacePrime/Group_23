@@ -10,27 +10,26 @@ public class LivingRoom
 
 	private boolean end_card;
 	
+	private ArrayList<Card> cards;
+	
 	//private boolean illegal_tile;
 	
 	//private int number_of_players;
 	
-	
-/** This constructor sets end_card as true and decides
- * whether each tile of the board is legal or illegal
- * depending on the number of players.
- * This constructor does not fill the board.
- */
+	/**
+	 * This constructor decides whether each tile of the board 
+	 * is legal or illegal depending on the number of players.
+	 * Then it calls the method LivingRoom.Reset to fill the board with cards.
+	 * @param number_of_players
+	 * @param cards
+	 */
 	public LivingRoom(int number_of_players, ArrayList<Card> cards)
 	{
 		this.end_card = true;
+		this.cards = cards;
 		
 		this.matrix = new LivingRoomTile[9][9];
 		
-	/** the value of each element in initialization_matrix
-	 * represents the number of players required for that 
-	 * element to be a legal tile.
-	 * Elements with a value of 5 will never be legal tiles.
-	 */
 		int initialization_matrix [][] = 	{	{5, 5, 5, 3, 4, 5, 5, 5, 5},
 												{5, 5, 5, 2, 2, 4, 5, 5, 5},
 												{5, 5, 3, 2, 2, 2, 3, 5, 5},
@@ -51,10 +50,10 @@ public class LivingRoom
 					matrix[row][column] = new LivingRoomTile(false);
 			}
 		}
-		this.reset(cards);
+		this.reset();
 	}
 	
-	public void reset (ArrayList<Card> cards) 
+	public void reset () 
 	{
 		for (int row = 0; row < 9; row++)
 		{
@@ -62,8 +61,7 @@ public class LivingRoom
 			{
 				if (tile.isLegalTile())
 				{
-					tile.setCard(cards.remove(0));
-					//tile.isOccupied();	
+					tile.setCard(cards.remove(0));	
 				}
 			}
 		}
@@ -94,7 +92,6 @@ public class LivingRoom
 		{
 			for (LivingRoomTile tile : matrix[row])
 			{
-				//tile.getCard();
 				if(!tile.isOccupied())
 				{	
 					System.out.print("\u001B[30m" + "*\t" + "\u001B[0m");
@@ -121,6 +118,15 @@ public class LivingRoom
 		}
 	}
 	
+	/**
+	 * This function checks if the cards that the player wants to remove are actually removable.
+	 * 
+	 * @param x
+	 * @param y
+	 * @param direction
+	 * @param n_of_cards
+	 * @return
+	 */
 	public boolean controlChosenCards(int x, int y, String direction, int n_of_cards)
 	{
 		int xAxisShift = 0;
