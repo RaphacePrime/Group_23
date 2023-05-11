@@ -10,8 +10,6 @@ public abstract class CommonGoal
 	
 	protected ArrayList<Integer> points;
 	
-	protected String description;
-	
 	public CommonGoal(int id)
 	{
 		points.add(8); points.add(6); points.add(4);
