@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class LivingRoom 
 {
-	
-	//private Card matrix [][];
 	private LivingRoomTile matrix [][];
 	
 	private ArrayList<Card> cards;
@@ -214,19 +212,13 @@ public class LivingRoom
 	}
 
 	public Card getCard(int x, int y) {
-		// una funzione che date due coordinate mi ritorna una Card
-		return null;
-	}
-
-	public void removeCards(ArrayList<Card> chosen) {
-		// rimuove le carte detnro chosen dalla living room
-		
+		return matrix[x][y].getCard();
 	}
 	
-	public ArrayList<Card> getCards(int x, int y, String direction, int n_ofcards) {
+	public ArrayList<Card> getCards(int startX, int startY, String direction, int n_of_cards) {
 		int xAxisShift = 0;
 		int yAxisShift = 0;
-		ArrayList<Card> chosen= new ArrayList<Card>();
+		ArrayList<Card> chosenCards = new ArrayList<Card>();
 		switch (direction)
 		{
 		case "N":
@@ -241,11 +233,15 @@ public class LivingRoom
 		case "E":
 			xAxisShift = 1;
 		}
-		Card card = matrix[x][y].getCard();
-		chosen.add(card);
+		for (int i=0; i < n_of_cards; i++)
+		{
+			int x = startX + i*xAxisShift;
+			int y = startY + i*yAxisShift;
+			chosenCards.add(matrix[x][y].getCard());
+			matrix[x][y].setCard(null);
+		}
+		return chosenCards;
 		// prende una carta, data la direzione scelta dall'utente (N-E-S-W) e il numero dic carte, restituisce una ArrayList<Card>
 		// contenente le Card scelte dall'utente, e le rimuove chiamando la funzione
-		this.removeCards(chosen);
-		return chosen;
 	}
 }
