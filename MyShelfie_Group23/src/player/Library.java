@@ -8,6 +8,13 @@ public class Library {
 	
 	private Card matrix[][];
 	
+	int initialization_matrix [][] ={ 	{0, 0, 0, 0, 0},
+										{0, 0, 0, 0, 0},
+										{0, 0, 0, 0, 0},
+										{0, 0, 0, 0, 0},
+										{0, 0, 0, 0, 0},
+										{0, 0, 0, 0, 0},	};
+	
 	public Library()
 	{
 		
