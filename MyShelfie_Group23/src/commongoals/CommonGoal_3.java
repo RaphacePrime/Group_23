@@ -28,7 +28,7 @@ public class CommonGoal_3 extends CommonGoal{
 
 	@Override
 	public void output() {
-		System.out.println("Four cards of the same colour in the four corners of your library");
+		System.out.println("Four cards of the same colour in the four corners of the bookshelf");
 	}
 
 }
