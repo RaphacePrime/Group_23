@@ -2,6 +2,8 @@ package main;
 
 import java.util.Scanner;
 
+import model.Game;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -22,5 +24,4 @@ public class Main {
 		game.turn();
 		sc.close();
 	}
-
 }
