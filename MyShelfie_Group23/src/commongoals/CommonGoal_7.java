@@ -39,7 +39,8 @@ if(matrix[i][j].getColor().equals(matrix[i+1][j].getColor())&&
 @Override
 public void output() {
 	
-	System.out.println("Four cards of the same colour in the four corners of the bookshelf");
+	System.out.println("Two groups each containing 4 titles of the same type in a 2x2 square. " +
+							+ "The titles of one square can be different from those of the other square.");
 	
 
 }
