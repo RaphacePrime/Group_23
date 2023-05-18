@@ -30,6 +30,7 @@ public class Player {
 		this.id = id;
 		this.chair=false;
 		this.points = 0;	
+		this.library= new Library();
 	}
 	
 	/**

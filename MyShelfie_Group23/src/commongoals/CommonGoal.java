@@ -12,6 +12,7 @@ public abstract class CommonGoal
 	
 	public CommonGoal(int id)
 	{
+		points= new ArrayList<Integer>();
 		points.add(8); points.add(6); points.add(4);
 		this.id=id;
 	}
