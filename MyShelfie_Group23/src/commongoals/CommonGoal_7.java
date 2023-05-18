@@ -38,7 +38,9 @@ if(matrix[i][j].getColor().equals(matrix[i+1][j].getColor())&&
 
 @Override
 public void output() {
-// TODO Auto-generated method stub
+	
+	System.out.println("Four cards of the same colour in the four corners of the bookshelf");
+	
 
 }
 
