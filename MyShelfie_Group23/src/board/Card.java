@@ -2,7 +2,7 @@ package board;
 
 public class Card {
 	
-	private final String color;
+	private String color;
 	
 	private int id;
 	
@@ -43,6 +43,11 @@ public class Card {
 			this.used = true;
 		
 		}
+	}
+
+	public boolean setColor(String string) {
+		this.color=string;
+		return false;
 	}
 
 }
