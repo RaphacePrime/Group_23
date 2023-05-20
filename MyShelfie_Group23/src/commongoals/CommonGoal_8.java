@@ -25,7 +25,7 @@ public class CommonGoal_8 extends CommonGoal{
 		int i,k;
 		
 		for(i=0;i<5;i++) {
-			for(k=0;k<5;k++) {
+			for(k=0;k<6;k++) {
 				if((row[i]==row[k])&&(i!=k)) {
 					return false;
 				}
