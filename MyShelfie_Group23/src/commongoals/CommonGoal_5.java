@@ -65,10 +65,15 @@ public class CommonGoal_5 extends CommonGoal {
                 }
             }
         }
-        System.out.println("Number of groups: " + count);
+        //System.out.println("Number of groups: " + count);
         return count >= 4;
     }
-
+    /**
+     * Sets any null elements in the matrix to the string "N".
+     *
+     * @param matrix The matrix of cards.
+     * @return The updated matrix with null elements replaced by "N".
+     */
 	private Card[][] setNullToString(Card[][] matrix) 
 	{
 		for (int i = 0; i < matrix.length; i++) {

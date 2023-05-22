@@ -25,36 +25,33 @@ public class CommonGoal_6 extends CommonGoal {
      * @return True if there are at least two columns composed of six cards of the same color, false otherwise.
      */
     @Override
-    public boolean checkGoal(Player player) 
-    {
+    public boolean checkGoal(Player player) {
+        /**
+         * Gets the matrix of cards from the player's library.
+         */
         Card[][] matrix = player.getLibrary().getMatrix();
-        matrix=this.setNullToString(matrix);
+
+        /**
+         * Sets any null elements in the matrix to the string "N".
+         */
+        matrix = this.setNullToString(matrix);
+
         int count = 0;
-        for (int col = 0; col < 5; col++) 
-        {
-        	boolean null_element=false;
+        for (int col = 0; col < 5; col++) {
+            boolean null_element = false;
             String[] colors = new String[6]; // Variable for line count, when the column is swapped, it resets
             System.out.print("Column " + col + ": ");
-            for (int lin = 0; lin < 6; lin++) 
-            {
-                //System.out.print(matrix[lin][col].getColor());
-            	if(matrix[lin][col].getColor().equals("N"))
-            	{
-            		null_element=true;
-            	}
-            	else
-            	{
-            		colors[lin] = matrix[lin][col].getColor();
-            	}
-                
+            for (int lin = 0; lin < 6; lin++) {
+                if (matrix[lin][col].getColor().equals("N")) {
+                    null_element = true;
+                } else {
+                    colors[lin] = matrix[lin][col].getColor();
+                }
             }
-            //System.out.println();
-            if (this.arrayCheck(colors) && null_element==false) 
-            {
+            if (this.arrayCheck(colors) && !null_element) {
                 count++;
             }
         }
-        //System.out.print("COUNT: " + count);
         return count >= 2;
     }
 
@@ -74,10 +71,15 @@ public class CommonGoal_6 extends CommonGoal {
         }
         return true;
     }
-    
-    private Card[][] setNullToString(Card[][] matrix) 
-	{
-		for (int i = 0; i < matrix.length; i++) {
+
+    /**
+     * Sets any null elements in the matrix to the string "N".
+     *
+     * @param matrix The matrix of cards.
+     * @return The updated matrix with null elements replaced by "N".
+     */
+    private Card[][] setNullToString(Card[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 if (matrix[i][j].getColor() == null) {
                     matrix[i][j].setColor("N");
@@ -92,8 +94,8 @@ public class CommonGoal_6 extends CommonGoal {
             }
             System.out.println();
         }
-		return matrix;
-	}
+        return matrix;
+    }
 
     /**
      * Prints the description of the common goal.

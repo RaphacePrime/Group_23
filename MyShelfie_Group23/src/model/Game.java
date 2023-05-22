@@ -1,8 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
@@ -27,6 +25,11 @@ public class Game
 	
 	private LivingRoom living_room;
 	
+	/**
+     * Constructs a new Game object with the specified number of players.
+     *
+     * @param n the number of players in the game
+     */
 	public Game(int n)
 	{
 		players = new ArrayList<Player>();
@@ -53,7 +56,10 @@ public class Game
 		System.out.print("2) ");this.common_goals[1].output();
 		this.living_room= new LivingRoom(this.number_of_players, cards);
 	}
-
+	
+	/**
+     * Creates the players for the game by taking user input for their names.
+     */
 	public void createPlayers()
 	{
 		Scanner sc= new Scanner(System.in);
@@ -67,6 +73,9 @@ public class Game
 		
 	}
 	
+	/**
+     * Executes a turn in the game where the active player can perform actions.
+     */
 	public void turn()
 	{
 		int index_players=0;//variable to manage the turns
@@ -142,12 +151,9 @@ public class Game
 						exit=true;
 					}
 					savePlayer();//saving the modification added to active_player
-					index_players++;//incrementing the index of array players
-					if(index_players==this.number_of_players)//when the player is the last player in the array, the next one will be in position 0 of the array
-					{
-						index_players=0;
-					}
+					System.out.println(this.active_player.getName()+"has ended his turn...");
 					nextPlayer();//switching active_player to next Player in array player
+					System.out.println("The next player is "+this.active_player.getName());
 					if(this.active_player.getChair()==true && exit==true)
 					{
 						control=false;//exit the game if the next player has the chair and someone completed the library
@@ -166,16 +172,33 @@ public class Game
 		//end game only to player before the chair
 	}
 	
+	/**
+     * Saves the modifications made to the active player and updates the player array.
+     */
 	public void savePlayer()//function to save in players array the modify added to active_player
 	{
 		this.players.set(index_players, active_player);
 	}
 	
+	/**
+     * Switches the active player to the next player in the player array.
+     */
 	public void nextPlayer()//switching active player to the next player
 	{
-		this.active_player=this.players.get(index_players);
+		if (this.index_players == this.number_of_players - 1)
+        {
+            this.index_players = 0;
+        }
+        else
+        {
+            this.index_players += 1;
+        }
+        this.active_player = this.players.get(index_players);
 	}
 	
+	/**
+     * Allows the active player to choose cards from the living room and insert them into their library.
+     */
 	public void chooseCard()
 	{
 		// coordinates, direction, number of cards
@@ -224,6 +247,9 @@ public class Game
 		}
 	}
 	
+	/**
+     * Generates the cards for the game.
+     */
 	public void generateCards()
 	{
 		String colors[]= {"pink", "blue", "green", "cyan", "yellow", "white"};
@@ -243,6 +269,9 @@ public class Game
 		}*/
 	}
 	
+	/**
+     * Sets the personal goals for each player in the game.
+     */
 	public void setPersonalGoal()//set 1 personal goal for each player
 	{
 		System.out.println("Press ENTER to extract Personal Goals...");
@@ -280,11 +309,9 @@ public class Game
 		sc.nextLine();
 	}
 	
-	public boolean getCard()
-	{
-		return true;
-	}
-	
+	/**
+     * Ends the game and displays the winner and their points.
+     */
 	public void endGame()
 	{
 		int max=0; int id=0;
@@ -303,6 +330,9 @@ public class Game
 		System.out.println("The WINNER is "+players.get(id).getName()+"!!!");
 	}
 	
+	/**
+     * Sets the common goals for the game by randomly selecting two common goals.
+     */
 	private void setCommonGoals() 
 	{
 		Random random = new Random();//deciding who starts
@@ -388,7 +418,4 @@ public class Game
 		}
 		
 	}
-	
-	
-
 }
