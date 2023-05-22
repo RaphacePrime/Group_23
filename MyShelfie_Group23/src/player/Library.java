@@ -6,6 +6,8 @@ import board.Card;
 
 public class Library {
 	
+	private int  prova;
+	
 	private Card matrix[][];
 	
 	public Library()
