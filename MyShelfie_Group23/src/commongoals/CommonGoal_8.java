@@ -32,7 +32,8 @@ public class CommonGoal_8 extends CommonGoal{
 
 	@Override
 	public void output() {
-		// TODO Auto-generated method stub
+		System.out.println("Due righe formate ciascuna\r\n"
+						 + "da 5 diversi tipi di tessere.");
 		
 	}
 	public boolean checkRow(String  row[]) {
