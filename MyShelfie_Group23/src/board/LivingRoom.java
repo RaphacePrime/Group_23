@@ -10,18 +10,18 @@ public class LivingRoom
 	
 	/**
 	 * This constructor decides whether each tile of the board 
-	 * is legal or illegal depending on the number of players.
+	 * is legal or illegal depending on the number of players in the game.
 	 * Then it calls the method LivingRoom.Reset to fill the board with cards.
-	 * @param number_of_players
-	 * @param cards
+	 * @param numberOfPlayers the number of players in the current game
+	 * @param cards the randomized list of cards which will be used in the current game
 	 */
-	public LivingRoom(int number_of_players, ArrayList<Card> cards)
+	public LivingRoom(int numberOfPlayers, ArrayList<Card> cards)
 	{
 		this.cards = cards;
 		
 		this.matrix = new LivingRoomTile[9][9];
 		
-		int initialization_matrix [][] = 	{	{5, 5, 5, 3, 4, 5, 5, 5, 5},
+		int initializationMatrix [][] = 	{	{5, 5, 5, 3, 4, 5, 5, 5, 5},
 												{5, 5, 5, 2, 2, 4, 5, 5, 5},
 												{5, 5, 3, 2, 2, 2, 3, 5, 5},
 												{5, 4, 2, 2, 2, 2, 2, 2, 3},
@@ -35,7 +35,7 @@ public class LivingRoom
 		{
 			for (int column = 0; column < 9; column++)
 			{
-				if (initialization_matrix[row][column] <= number_of_players)
+				if (initializationMatrix[row][column] <= numberOfPlayers)
 					matrix[row][column] = new LivingRoomTile(true);
 				else 
 					matrix[row][column] = new LivingRoomTile(false);
@@ -44,6 +44,12 @@ public class LivingRoom
 		this.reset();
 	}
 	
+	/**
+	 * This method checks if the board needs resetting 
+	 * (no card on the board has an adjacent card in any direction) 
+	 * if the condition is met, it then fills the legal tiles of the board 
+	 * with cards which were not yet used.
+	 */
 	public void reset () 
 	{
 		if (!this.checkReset()) {
@@ -80,7 +86,10 @@ public class LivingRoom
 		}
 		return true;		
 	}
-	
+	/**
+	 * This method shows the current state of the board
+	 * on the console. Cards are shown as a color-coded "*".
+	 */
 	public void output()
 	{
 		for (int row = 0; row < 9; row++)
@@ -94,7 +103,7 @@ public class LivingRoom
 				else {
 					
 					String tileColor = new String();
-					tileColor = tile.getColor();
+					tileColor = tile.getCard().getColor();
 					if(tileColor.equals("yellow")) {
 						System.out.print("\u001B[33m" + "*\t" + "\u001B[0m");
 					}else if(tileColor.equals("pink")) {
@@ -114,15 +123,15 @@ public class LivingRoom
 	}
 	
 	/**
-	 * This function checks if the cards that the player wants to remove are actually removable.
-	 * 
-	 * @param x
-	 * @param y
-	 * @param direction
-	 * @param n_of_cards
-	 * @return
+	 * This method checks if the cards that the player wants to remove 
+	 * are actually removable.
+	 * @param x the x-coordinate of the first card that the player wants to remove
+	 * @param y the y-coordinate of the first card that the player wants to remove
+	 * @param direction the cardinal direction in which the array of cards continues
+	 * @param numberOfCards how many cards the player has selected (1 to 3)
+	 * @return true if the cards are removable, false otherwise
 	 */
-	public boolean controlChosenCards(int x, int y, String direction, int n_of_cards)
+	public boolean controlChosenCards(int x, int y, String direction, int numberOfCards)
 	{
 		int xAxisShift = 0;
 		int yAxisShift = 0;
@@ -140,7 +149,7 @@ public class LivingRoom
 		case "E":
 			xAxisShift = 1;
 		}
-		for (int i=0; i < n_of_cards; i++)
+		for (int i=0; i < numberOfCards; i++)
 		{
 			if(!isRemovable(x + i*xAxisShift,y + i*yAxisShift))
 			{
@@ -169,7 +178,6 @@ public class LivingRoom
 			}
 		}
 	}
-	
 	
 	private int hasNeighbours (int x, int y)
 	{
@@ -205,17 +213,17 @@ public class LivingRoom
 		}
 		return neighbours;
 	}
-
-	public void removeCard(int x, int y)
-	{
-		matrix[x][y].setCard(null);
-	}
-
-	public Card getCard(int x, int y) {
-		return matrix[x][y].getCard();
-	}
 	
-	public ArrayList<Card> getCards(int startX, int startY, String direction, int n_of_cards) {
+	/**
+	 * This method creates an ArrayList which contains 1 to 3 cards selected by the player,
+	 * these cards get removed from the board and will be later put in the player's library
+	 * @param startX the x-coordinate of the first card that the player wants to remove
+	 * @param startY the y-coordinate of the first card that the player wants to remove
+	 * @param direction direction the cardinal direction in which the array of cards continues
+	 * @param numberOfCards how many cards the player has selected (1 to 3)
+	 * @return an ArrayList which contains the cards removed from the board by the player
+	 */
+	public ArrayList<Card> getCards(int startX, int startY, String direction, int numberOfCards) {
 		int xAxisShift = 0;
 		int yAxisShift = 0;
 		ArrayList<Card> chosenCards = new ArrayList<Card>();
@@ -233,7 +241,7 @@ public class LivingRoom
 		case "E":
 			xAxisShift = 1;
 		}
-		for (int i=0; i < n_of_cards; i++)
+		for (int i=0; i < numberOfCards; i++)
 		{
 			int x = startX + i*xAxisShift;
 			int y = startY + i*yAxisShift;
@@ -241,7 +249,5 @@ public class LivingRoom
 			matrix[x][y].setCard(null);
 		}
 		return chosenCards;
-		// prende una carta, data la direzione scelta dall'utente (N-E-S-W) e il numero dic carte, restituisce una ArrayList<Card>
-		// contenente le Card scelte dall'utente, e le rimuove chiamando la funzione
 	}
 }
