@@ -8,6 +8,13 @@ public class Card {
 	
 	boolean used;
 	
+	public Card()
+	{
+		this.color=null;
+		this.id=0;
+		this.used=false;
+	}
+	
 	public Card(String color, int id) {
 		
 		this.color = color;

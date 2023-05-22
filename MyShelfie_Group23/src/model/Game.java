@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
@@ -27,7 +29,6 @@ public class Game
 	
 	public Game(int n)
 	{
-		Scanner sc= new Scanner(System.in);
 		players = new ArrayList<Player>();
 		cards = new ArrayList<Card>(); 
 		number_of_players=n;
@@ -35,20 +36,22 @@ public class Game
 		generateCards();//calling function to generate the 122 cards
 		createPlayers();
 		setPersonalGoal();//calling the function to pick the personal goals
-		System.out.println("Press enter to randomly decide who get the chair and starts to play....");
+		System.out.print("Press enter to randomly decide who get the chair and starts to play....");
+		Scanner sc= new Scanner(System.in);
 		sc.nextLine();
 		Random random = new Random();//deciding who starts
 		this.index_players = random.nextInt(this.number_of_players + 0) + 0;
 		this.players.get(this.index_players).setChair();//setting the chair to the player extracted randomly
 		System.out.println("The player that recive the chair is "+players.get(this.index_players).getName()+"!!!");
 		this.active_player=this.players.get(index_players);//setting the active player
-		System.out.print("Press enter to extract 2 Common Goals....");sc.nextLine();
+		System.out.print("Press enter to extract 2 Common Goals....");
+		sc.reset();
+		sc.nextLine();
 		setCommonGoals();
 		System.out.println("The Common Goals have been extracted :");
 		System.out.print("1) ");this.common_goals[0].output();
 		System.out.print("2) ");this.common_goals[1].output();
 		this.living_room= new LivingRoom(this.number_of_players, cards);
-		sc.close();
 	}
 
 	public void createPlayers()
@@ -61,7 +64,7 @@ public class Game
 			Player p= new Player(name, i);
 			this.players.add(p);//adding the player created in the arrayList
 		}
-		sc.close();
+		
 	}
 	
 	public void turn()
@@ -72,7 +75,7 @@ public class Game
 		boolean exit=false;//variable for the last turns of players
 		while(control)
 		{
-			System.out.println("It's "+this.active_player.getName()+"'s turn!");
+			System.out.println(this.active_player.getName()+"'s turn");
 			System.out.println("Select a option in the MENU': ");
 			System.out.println("1)Show the LIVING ROOM");
 			System.out.println("2)Show your LIBRARY");
@@ -159,7 +162,6 @@ public class Game
 			sc.nextLine();
 		}
 		endGame();// end the game 
-		sc.close();
 		//switch player
 		//end game only to player before the chair
 	}
@@ -190,7 +192,7 @@ public class Game
 			String sy=sc.nextLine(); int y=Integer.parseInt(sy);
 			System.out.println("Insert the direction of the next cards(N-E-S-W): ");
 			String direction=sc.nextLine();
-			while(direction!="N"&&direction!="S"&&direction!="W"&&direction!="E")
+			while(!direction.equals("N")&&!direction.equals("S")&&!direction.equals("W")&&!direction.equals("E"))
 			{
 				System.out.println("You must choose N or E or S or W");
 				direction=sc.nextLine();						
@@ -220,8 +222,6 @@ public class Game
 				System.out.println("Cards must be in order! Enter again the coordinates");
 			}
 		}
-		sc.close();
-		scint.close();
 	}
 	
 	public void generateCards()
@@ -233,7 +233,7 @@ public class Game
 			{
 				Card t= new Card(colors[j], i);
 				this.cards.add(t);
-				System.out.println(t.getColor()+t.getID());
+				//System.out.println(t.getColor()+t.getID());
 			}
 		}
 		Collections.shuffle(cards);;//mixing the bags
@@ -245,8 +245,9 @@ public class Game
 	
 	public void setPersonalGoal()//set 1 personal goal for each player
 	{
-		System.out.println("Extracting Personal Goals...");
+		System.out.println("Press ENTER to extract Personal Goals...");
 		Scanner sc= new Scanner(System.in);
+		sc.nextLine();
 		boolean control;
 		Random random= new Random();
 		ArrayList<Integer> generated_ids= new ArrayList<Integer>();//creating an ArrayList for checking duplicates extractions
@@ -272,10 +273,11 @@ public class Game
 			players.get(y).setPersonalGoal(generated_ids.get(y));//setting the personal goal to each player
 			System.out.println(players.get(y).getName()+"'s Personal Goal :");
 			players.get(y).getPersonalGoal().output();
-			System.out.print("Press enter key to continue....");
+			System.out.print("Press ENTER key to continue....");
 			sc.nextLine();
 		}
-		sc.close();
+		System.out.print("Press ENTER key to continue....");
+		sc.nextLine();
 	}
 	
 	public boolean getCard()
@@ -297,9 +299,8 @@ public class Game
 				id=i;
 			}
 		}
-		System.out.print("Press enter to continue"); sc.nextLine();
+		System.out.print("Press ENTER to continue"); sc.nextLine();
 		System.out.println("The WINNER is "+players.get(id).getName()+"!!!");
-		sc.close();
 	}
 	
 	private void setCommonGoals() 
@@ -311,73 +312,75 @@ public class Game
 			c1 = random.nextInt(12+0)+1; //extracting number between 1-12 to decide which common goals are extracted
 			c2 = random.nextInt(12+0)+1;
 		}while(c1==c2);
+		System.out.println("CG extracted are: Goal number "+c1+" and Goal number "+c2);
 		int index_commongoals=0;
 		if(c1==1||c2==1) //creating 2 different commongoals and 
 		{
 			CommonGoal c= new CommonGoal_1(1);
 			this.common_goals[index_commongoals]=c;
 			index_commongoals++;
-		}else if(c1==2||c2==2)
+		}
+		if(c1==2||c2==2)
 		{
 			CommonGoal c= new CommonGoal_2(2);
 			this.common_goals[index_commongoals]=c;
 			index_commongoals++;
 		}
-		else if(c1==3||c2==3)
+		if(c1==3||c2==3)
 		{
 			CommonGoal c= new CommonGoal_3(3);
 			this.common_goals[index_commongoals]=c;
 			index_commongoals++;
 		}
-		else if(c1==4||c2==4)
+		if(c1==4||c2==4)
 		{
 			CommonGoal c= new CommonGoal_4(4);
 			this.common_goals[index_commongoals]=c;
 			index_commongoals++;
 		}
-		else if(c1==5||c2==5)
+		if(c1==5||c2==5)
 		{
 			CommonGoal c= new CommonGoal_5(5);
 			this.common_goals[index_commongoals]=c;
 			index_commongoals++;
 		}
-		else if(c1==6||c2==6)
+		if(c1==6||c2==6)
 		{
 			CommonGoal c= new CommonGoal_6(6);
 			this.common_goals[index_commongoals]=c;
 			index_commongoals++;
 		}
-		else if(c1==7||c2==7)
+		if(c1==7||c2==7)
 		{
 			CommonGoal c= new CommonGoal_7(7);
 			this.common_goals[index_commongoals]=c;
 			index_commongoals++;
 		}
-		else if(c1==8||c2==8)
+		if(c1==8||c2==8)
 		{
 			CommonGoal c= new CommonGoal_8(8);
 			this.common_goals[index_commongoals]=c;
 			index_commongoals++;
 		}
-		else if(c1==9||c2==9)
+		if(c1==9||c2==9)
 		{
 			CommonGoal c= new CommonGoal_9(9);
 			this.common_goals[index_commongoals]=c;
 			index_commongoals++;
 		}
-		else if(c1==10||c2==10)
+		if(c1==10||c2==10)
 		{
 			CommonGoal c= new CommonGoal_10(10);
 			this.common_goals[index_commongoals]=c;
 			index_commongoals++;
 		}
-		else if(c1==11||c2==11)
+		if(c1==11||c2==11)
 		{
 			CommonGoal c= new CommonGoal_11(11);
 			this.common_goals[index_commongoals]=c;
 			index_commongoals++;
 		}
-		else if(c1==12||c2==12)
+		if(c1==12||c2==12)
 		{
 			CommonGoal c= new CommonGoal_12(12);
 			this.common_goals[index_commongoals]=c;

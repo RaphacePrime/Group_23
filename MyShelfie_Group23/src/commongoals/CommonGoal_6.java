@@ -25,22 +25,36 @@ public class CommonGoal_6 extends CommonGoal {
      * @return True if there are at least two columns composed of six cards of the same color, false otherwise.
      */
     @Override
-    public boolean checkGoal(Player player) {
+    public boolean checkGoal(Player player) 
+    {
         Card[][] matrix = player.getLibrary().getMatrix();
+        matrix=this.setNullToString(matrix);
         int count = 0;
-        for (int col = 0; col < 5; col++) {
+        for (int col = 0; col < 5; col++) 
+        {
+        	boolean null_element=false;
             String[] colors = new String[6]; // Variable for line count, when the column is swapped, it resets
             System.out.print("Column " + col + ": ");
-            for (int lin = 0; lin < 6; lin++) {
-                System.out.print(matrix[lin][col].getColor());
-                colors[lin] = matrix[lin][col].getColor();
+            for (int lin = 0; lin < 6; lin++) 
+            {
+                //System.out.print(matrix[lin][col].getColor());
+            	if(matrix[lin][col].getColor().equals("N"))
+            	{
+            		null_element=true;
+            	}
+            	else
+            	{
+            		colors[lin] = matrix[lin][col].getColor();
+            	}
+                
             }
-            System.out.println();
-            if (this.arrayCheck(colors)) {
+            //System.out.println();
+            if (this.arrayCheck(colors) && null_element==false) 
+            {
                 count++;
             }
         }
-        System.out.print("COUNT: " + count);
+        //System.out.print("COUNT: " + count);
         return count >= 2;
     }
 
@@ -60,6 +74,26 @@ public class CommonGoal_6 extends CommonGoal {
         }
         return true;
     }
+    
+    private Card[][] setNullToString(Card[][] matrix) 
+	{
+		for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j].getColor() == null) {
+                    matrix[i][j].setColor("N");
+                }
+            }
+        }
+
+        // Print the updated matrix
+        for (Card[] row : matrix) {
+            for (Card element : row) {
+                System.out.print(element.getColor() + " ");
+            }
+            System.out.println();
+        }
+		return matrix;
+	}
 
     /**
      * Prints the description of the common goal.

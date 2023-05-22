@@ -35,6 +35,7 @@ public class CommonGoal_5 extends CommonGoal {
     @Override
     public boolean checkGoal(Player player) {
         Card[][] matrix = player.getLibrary().getMatrix();
+        matrix=this.setNullToString(matrix);
         int count = 0; // Counter for the found groups
 
         // Scan the rows
@@ -44,7 +45,7 @@ public class CommonGoal_5 extends CommonGoal {
                 String current = matrix[i][j].getColor();
 
                 // Check if there are four equal strings in the same row
-                if (j + 3 < matrix[i].length && !current.equals("N") && current.equals(matrix[i][j + 1].getColor()) && current.equals(matrix[i][j + 2].getColor()) && current.equals(matrix[i][j + 3].getColor())) {
+                if (j + 3 < matrix[i].length && current!="N" && current.equals(matrix[i][j + 1].getColor()) && current.equals(matrix[i][j + 2].getColor()) && current.equals(matrix[i][j + 3].getColor())) {
                     count++;
                     // Set the strings in the group to "N"
                     matrix[i][j].setColor("N");
@@ -67,4 +68,25 @@ public class CommonGoal_5 extends CommonGoal {
         System.out.println("Number of groups: " + count);
         return count >= 4;
     }
+
+	private Card[][] setNullToString(Card[][] matrix) 
+	{
+		for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j].getColor() == null) {
+                    matrix[i][j].setColor("N");
+                }
+            }
+        }
+		/*
+        // Print the updated matrix
+        for (Card[] row : matrix) {
+            for (Card element : row) {
+                System.out.print(element.getColor() + " ");
+            }
+            System.out.println();
+        }
+        */
+		return matrix;		
+	}
 }

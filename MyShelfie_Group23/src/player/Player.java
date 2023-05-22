@@ -14,7 +14,7 @@ public class Player {
 	
 	private PersonalGoal personalGoal; 
 	
-	private boolean check_commonGoals[];//check if goal 1 and goal 2 are completed
+	private boolean check_commonGoals[]={false, false};//check if goal 1 and goal 2 are completed
 	
 	private int points;
 	

@@ -20,8 +20,12 @@ public class Main {
 		}
 		System.out.println("Press ENTER key to start...");
 		sc.nextLine();
+		sc.reset();
+		
 		Game game=new Game(number_of_players);
 		game.turn();
 		sc.close();
+		
+		
 	}
 }
