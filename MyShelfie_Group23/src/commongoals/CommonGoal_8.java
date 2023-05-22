@@ -12,7 +12,21 @@ public class CommonGoal_8 extends CommonGoal{
 
 	@Override
 	public boolean checkGoal(Player player) {
-		// TODO Auto-generated method stub
+		int i , k = 0, count = 0;
+		Card[][] matrix = player.getLibrary().getMatrix();
+		String row[] = null;
+		
+		for(i = 0; i<6;i++) {
+				row[k]=matrix[k][i].getColor();
+			}
+			if(checkRow(row)) {
+				count++;
+			}
+			if(count == 2) {
+				return true;
+		}
+	
+
 		return false;
 	}
 
@@ -33,20 +47,5 @@ public class CommonGoal_8 extends CommonGoal{
 		}
 		return true;
 	}
-	public boolean checkGoal(Card matrix[][]) {
-		int i , k = 0, count = 0;
-		String row[] = null;
-		for(i = 0; i<6;i++) {
-				row[k]=matrix[k][i].getColor();
-			}
-			if(checkRow(row)) {
-				count++;
-			}
-			if(count == 2) {
-				return true;
-		}
 	
-
-		return false;
-}
 }
