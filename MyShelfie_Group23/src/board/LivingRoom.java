@@ -31,14 +31,14 @@ public class LivingRoom
 												{5, 5, 5, 4, 2, 2, 5, 5, 5},
 												{5, 5, 5, 5, 4, 3, 5, 5, 5},	};
 		
-		for (int row = 0; row < 9; row++)
+		for (int x = 0; x < 9; x++)
 		{
-			for (int column = 0; column < 9; column++)
+			for (int y = 0; y < 9; y++)
 			{
-				if (initializationMatrix[row][column] <= numberOfPlayers)
-					matrix[row][column] = new LivingRoomTile(true);
+				if (initializationMatrix[x][y] <= numberOfPlayers)
+					matrix[x][y] = new LivingRoomTile(true);
 				else 
-					matrix[row][column] = new LivingRoomTile(false);
+					matrix[x][y] = new LivingRoomTile(false);
 			}
 		}
 		this.reset();
@@ -56,9 +56,9 @@ public class LivingRoom
 			return;
 		}
 		System.out.println("The board is being resetted...");
-		for (int row = 0; row < 9; row++)
+		for (int x = 0; x < 9; x++)
 		{
-			for (LivingRoomTile tile : matrix[row])
+			for (LivingRoomTile tile : matrix[x])
 			{
 				if (tile.isLegalTile())
 				{
@@ -92,34 +92,42 @@ public class LivingRoom
 	 */
 	public void output()
 	{
-		for (int row = 0; row < 9; row++)
+		System.out.println("\t\t  y\n\t  1 2 3 4 5 6 7 8 9");
+		for (int x = 0; x < 9; x++)
 		{
-			for (LivingRoomTile tile : matrix[row])
+			if(x==4) {
+				System.out.print("      x");
+			}
+			System.out.print("\t" + (x+1) + " ");
+			for (LivingRoomTile tile : matrix[x])
 			{
-				if(!tile.isOccupied())
-				{	
-					System.out.print("\u001B[30m" + "*\t" + "\u001B[0m");
+				if (!tile.isLegalTile()) {
+					System.out.print("\u001B[30m" + "x " + "\u001B[0m");
+				}
+				else if(!tile.isOccupied()) {	
+					System.out.print("\u001B[30m" + "* " + "\u001B[0m");
 				}
 				else {
-					
 					String tileColor = new String();
 					tileColor = tile.getCard().getColor();
 					if(tileColor.equals("yellow")) {
-						System.out.print("\u001B[33m" + "*\t" + "\u001B[0m");
+						System.out.print("\u001B[33m" + "# " + "\u001B[0m");
 					}else if(tileColor.equals("pink")) {
-						System.out.print("\u001B[31m" + "*\t" + "\u001B[0m");
+						System.out.print("\u001B[31m" + "# " + "\u001B[0m");
 					}else if(tileColor.equals("blue")) {
-						System.out.print("\u001B[34m" + "*\t" + "\u001B[0m");
+						System.out.print("\u001B[34m" + "# " + "\u001B[0m");
 					}else if(tileColor.equals("green")) {
-						System.out.print("\u001B[32m" + "*\t" + "\u001B[0m");
+						System.out.print("\u001B[32m" + "# " + "\u001B[0m");
 					}else if(tileColor.equals("cyan")) {
-						System.out.print("\u001B[36m" + "*\t" + "\u001B[0m");
+						System.out.print("\u001B[36m" + "# " + "\u001B[0m");
 					}else if(tileColor.equals("white")) {
-						System.out.print("\u001B[37m" + "*\t" + "\u001B[0m");
+						System.out.print("\u001B[37m" + "# " + "\u001B[0m");
 					}
 				}
 			}
+			System.out.println();
 		}
+		System.out.println();
 	}
 	
 	/**
@@ -133,15 +141,17 @@ public class LivingRoom
 	 */
 	public boolean controlChosenCards(int x, int y, String direction, int numberOfCards)
 	{
+		--x;
+		--y;
 		int xAxisShift = 0;
 		int yAxisShift = 0;
 		switch (direction)
 		{
 		case "N":
-			yAxisShift = 1;
+			yAxisShift = -1;
 			break;
 		case "S":
-			yAxisShift = -1;
+			yAxisShift = 1;
 			break;
 		case "W":
 			xAxisShift = -1;
@@ -224,16 +234,18 @@ public class LivingRoom
 	 * @return an ArrayList which contains the cards removed from the board by the player
 	 */
 	public ArrayList<Card> getCards(int startX, int startY, String direction, int numberOfCards) {
+		--startX;
+		--startY;
 		int xAxisShift = 0;
 		int yAxisShift = 0;
 		ArrayList<Card> chosenCards = new ArrayList<Card>();
 		switch (direction)
 		{
 		case "N":
-			yAxisShift = 1;
+			yAxisShift = -1;
 			break;
 		case "S":
-			yAxisShift = -1;
+			yAxisShift = 1;
 			break;
 		case "W":
 			xAxisShift = -1;
