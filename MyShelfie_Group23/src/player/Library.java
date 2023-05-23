@@ -23,7 +23,7 @@ public class Library {
 		return legalTile;
 	}
 	
-	public boolean isOccupied()
+/**	public boolean isOccupied()
 	{
 		if (!this.isLegalTile())
 		{
@@ -38,27 +38,37 @@ public class Library {
 			return false;
 		}
 	}
-	
+	*/
 	public boolean checkFullness()
 	{
 		return true;
 	}
 	
-	public boolean insertInLibrary(ArrayList<Card> chosen, int column)
+	public void insertInLibrary(ArrayList<Card> chosen, Card[][] matrix, int column, int row)
 	{		
 		System.out.println("insert a position in which you want to put the card. positions go from 1 to 5");
 		Scanner sc = new Scanner(System.in);
 		int Column = sc.nextInt();
-		for (int row = 0; row < 6;row++) {
+		for (row = 6; row > 0; row--) 
+		{
+			if(matrix[Column][row]==null) {
+				matrix[Column][row]= "ArrayList<Card> chosen";  //non so quale sia la funzione che va a prendere le carte dalla board 			
+			} 
+			
+		}
+		
+		
+		/**for (int row = 0; row < 6;row++) {
 			for (Card tile : matrix[row])
 			{
 				if(!tile.isOccupied())
 				{	
-					Card[row]= card.chosen; //non so quale sia la funzione che va a prendere le carte dalla board,
-				}
+					return false;
+				}else
+					Card[row]= card.chosen; //non so quale sia la funzione che va a prendere le carte dalla board
 				row++;
 		}
-		
+		*/
 			
 		
 		/**
@@ -77,8 +87,7 @@ public class Library {
 		}else if(tileColor.equals("white")) {
 			System.out.print("\u001B[37m" + "*\t" + "\u001B[0m");
 		*/
-		
-		return true;
+			
 	}
 
 	public void output()
