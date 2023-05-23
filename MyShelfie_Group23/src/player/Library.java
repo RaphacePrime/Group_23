@@ -8,18 +8,35 @@ import board.LivingRoomTile;
 public class Library {
 	
 	private Card matrix[][];
-
+	private Card card;
+	private final boolean legalTile;
 	
-	public Library()
+	public Library(boolean legalTile)
 	{
+		this.legalTile = legalTile;
+		this.card = null;
 		this.matrix = new Card[6][5];
-		
-		int Card [][] ={ 	{1, 2, 3, 4, 5},
-							{1, 2, 3, 4, 5},
-							{1, 2, 3, 4, 5},
-							{1, 2, 3, 4, 5},
-							{1, 2, 3, 4, 5},
-							{1, 2, 3, 4, 5},	};
+				
+	}
+	public boolean isLegalTile() 
+	{
+		return legalTile;
+	}
+	
+	public boolean isOccupied()
+	{
+		if (!this.isLegalTile())
+		{
+			return false;
+		}
+		else if (this.card != null)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	public boolean checkFullness()
@@ -32,12 +49,14 @@ public class Library {
 		System.out.println("insert a position in which you want to put the card. positions go from 1 to 5");
 		Scanner sc = new Scanner(System.in);
 		int Column = sc.nextInt();
-		for (int i = 0; i < Card.Lenght();i++) {
-			if (i == Card[Column]) {
-				Card[Column] = ArrayLinjst<Card> chosen;
-			}
-			else
-				i++;
+		for (int row = 0; row < 6;row++) {
+			for (Card tile : matrix[row])
+			{
+				if(!tile.isOccupied())
+				{	
+					Card[row]= card.chosen; //non so quale sia la funzione che va a prendere le carte dalla board,
+				}
+				row++;
 		}
 		
 			
