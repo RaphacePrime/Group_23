@@ -66,25 +66,7 @@ public class Library {
 		}
 		*/
 			
-		
-		/**
-		 * String tileColor = new String();
-		tileColor = tile.getCard().getColor();
-		if(tileColor.equals("yellow")) {
-			System.out.print("\u001B[33m" + "*\t" + "\u001B[0m");
-		}else if(tileColor.equals("pink")) {
-			System.out.print("\u001B[31m" + "*\t" + "\u001B[0m");
-		}else if(tileColor.equals("blue")) {
-			System.out.print("\u001B[34m" + "*\t" + "\u001B[0m");
-		}else if(tileColor.equals("green")) {
-			System.out.print("\u001B[32m" + "*\t" + "\u001B[0m");
-		}else if(tileColor.equals("cyan")) {
-			System.out.print("\u001B[36m" + "*\t" + "\u001B[0m");
-		}else if(tileColor.equals("white")) {
-			System.out.print("\u001B[37m" + "*\t" + "\u001B[0m");
-		*/
-		
-			
+	
 	}
 
 	public void output()
