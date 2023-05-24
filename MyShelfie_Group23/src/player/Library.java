@@ -40,7 +40,7 @@ public class Library {
 		return true;
 	}
 	
-	public void insertInLibrary(ArrayList<Card> chosen, int cloumn, int row)
+	public boolean insertInLibrary(ArrayList<Card> chosen, int cloumn, int row)
 	{		
 		System.out.println("insert a position in which you want to put the card. positions go from 1 to 5");
 		Scanner sc = new Scanner(System.in);
