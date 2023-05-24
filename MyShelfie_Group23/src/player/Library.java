@@ -47,9 +47,9 @@ public class Library {
 		int Column = sc.nextInt();
 		for (row = 6; row > 0; row--) 
 		{
-			if(matrix[Column][row]!=null) {
+			if(matrix[Column][row]==null) {
 				matrix[Column][row]= ArrayList<Card> chosen;  //non so quale sia la variabile in cui si salva la carta/e 			
-			} 
+			}
 			
 		}
 		
