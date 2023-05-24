@@ -46,9 +46,9 @@ public class Library {
 		Scanner sc = new Scanner(System.in);
 		int Column = sc.nextInt();
 		for (row = 6; row > 0; row--) 
-		{a
-			if(matrix[Column][row]==null) {
-				matrix[Column][row]= "ArrayList<Card> chosen";  //non so quale sia la funzione che va a prendere le carte dalla board 			
+		{
+			if(matrix[Column][row]!=null) {
+				matrix[Column][row]= ArrayList<Card> chosen;  //non so quale sia la variabile in cui si salva la carta/e 			
 			} 
 			
 		}
