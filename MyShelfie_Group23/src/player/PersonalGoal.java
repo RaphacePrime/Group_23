@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import board.Card;
+
 public class PersonalGoal 
 {
 	
@@ -32,12 +34,14 @@ public class PersonalGoal
 	
 	public void controlGoal (Library lib)
 	{
+		Card[][] PlayerMatrix = lib.getMatrix();	//Matrix of the library of the player
+		
 		int boxCompleted = 0;
 		for(int j=0; j < 5; j++) {
 			
 			for(int i = 0; i < 6; i++) {
 				
-				if(matrix[i][j] != null && matrix[i][j].equals("pink" /* lib.matrix[i][j].getColor() */)) {
+				if(matrix[i][j] != null && matrix[i][j].equals(PlayerMatrix[i][j].getColor())) {
 					
 					boxCompleted++;
 					
