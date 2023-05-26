@@ -40,18 +40,31 @@ public class Library {
 		return true;
 	}
 	
-	public boolean insertInLibrary(ArrayList<Card> chosen, int cloumn, int row)
-	{		
+	public boolean insertInLibrary(ArrayList<Card> chosen, int cloumn)
+	{	
+		Scanner sc;
+		int Column;
+		do {
 		System.out.println("insert a position in which you want to put the card. positions go from 1 to 5");
-		Scanner sc = new Scanner(System.in);
-		int Column = sc.nextInt();
-		for (row = 6; row > 0; row--) 
+		sc = new Scanner(System.in);
+		Column = sc.nextInt();
+		}while(Column<1 && Column > 5); 
+		
+		
+		for (int row = 6; row > 0; row--) 
 		{
-			if(matrix[Column][row]==null) {
-				matrix[Column][row]= ArrayList<Card> chosen;  //non so quale sia la variabile in cui si salva la carta/e 			
+			int SelectedCard=1;
+			if(matrix[Column][row]!=null) { 
+				break;
+			}else {
+				matrix[Column][row]= chosen.get(SelectedCard);
+				chosen.remove(SelectedCard);
+				
 			}
-			
+			sc.close();
+			SelectedCard++;
 		}
+	}
 		
 		
 		/**for (int row = 0; row < 6;row++) {
