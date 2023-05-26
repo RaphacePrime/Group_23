@@ -38,10 +38,7 @@ public class CommonGoal_9 extends CommonGoal{
 	@Override
 	public void output() {
 		
-		System.out.println("Three columns each formed by 6 tiles Five tiles of the same type forming an X." +
-							"of maximum three different types. " +
-							 "One column can show the same or a different" + 
-								"combination of another column");
+		System.out.println("Three columns each formed by 6 tiles of maximum three different types. One column can show the same or a different combination of another column.");
 		
 	}
 
