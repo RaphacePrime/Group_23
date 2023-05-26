@@ -12,10 +12,10 @@ public class CommonGoal_1 extends CommonGoal{
 
 	@Override
 	public void output() {
-		System.out.println("Sei gruppi separati formati ciascuno\r\n"
-				+ "da due tessere adiacenti dello stesso tipo.\r\n"
-				+ "Le tessere di un gruppo possono\r\n"
-				+ "essere diverse da quelle di un altro gruppo.");
+		System.out.println("Sei gruppi separati formati ciascuno "
+				+ "da due tessere adiacenti dello stesso tipo. "
+				+ "Le tessere di un gruppo possono "
+				+ "essere diverse da quelle di un altro gruppo. ");
 		
 	}
 	public static int contaCoppie(Card[][] matrix,boolean [][] used, int i , int j) {
