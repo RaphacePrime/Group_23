@@ -54,14 +54,15 @@ public class Library {
 		for (int row = 6; row > 0; row--) 
 		{
 			int SelectedCard=1;
-			if(matrix[Column][row]!=null) { 
+			if(matrix[Column][row]!=null) 
+			{ 
 				break;
-			}else {
+			}else 
+			{
 				matrix[Column][row]= chosen.get(SelectedCard);
 				chosen.remove(SelectedCard);
-				
+				sc.close();
 			}
-			sc.close();
 			SelectedCard++;
 		}
 	}
