@@ -44,14 +44,20 @@ public class Library {
 	{	
 		Scanner sc;
 		int Column;
-		do {
-		System.out.println("insert a position in which you want to put the card. positions go from 1 to 5");
-		sc = new Scanner(System.in);
-		Column = sc.nextInt();
-		}while(Column<1 && Column > 5); 
+		do {	
+			int row;
+			do {
+					System.out.println("insert the COLUMN in which you want to put the card. positions go from 1 to 5");
+					sc = new Scanner(System.in);
+					Column = sc.nextInt();
+			}while(Column<1 && Column > 5); 
+	
+		}while(matrix[Column][1]!=null);{
+			System.out.print("the chosen COLUMN is currently full");
+		}
 		
 		
-		for (int row = 6; row > 0; row--) 
+		for (int row = 5; row > 0; row--) 
 		{
 			int SelectedCard=1;
 			if(matrix[Column][row]!=null) 
