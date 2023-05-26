@@ -32,7 +32,7 @@ public class CommonGoal_8 extends CommonGoal{
 
 	@Override
 	public void output() {
-		System.out.println("Due righe formate ciascuna\r\n"
+		System.out.println("Due righe formate ciascuna "
 						 + "da 5 diversi tipi di tessere.");
 		
 	}
