@@ -34,7 +34,6 @@ public class CommonGoal_6 extends CommonGoal {
         /**
          * Sets any null elements in the matrix to the string "N".
          */
-        matrix = this.setNullToString(matrix);
 
         int count = 0;
         for (int col = 0; col < 5; col++) {
@@ -42,13 +41,13 @@ public class CommonGoal_6 extends CommonGoal {
             String[] colors = new String[6]; // Variable for line count, when the column is swapped, it resets
             System.out.print("Column " + col + ": ");
             for (int lin = 0; lin < 6; lin++) {
-                if (matrix[lin][col].getColor().equals("N")) {
+                if (matrix[lin][col].getColor()==null) {
                     null_element = true;
                 } else {
                     colors[lin] = matrix[lin][col].getColor();
                 }
             }
-            if (this.arrayCheck(colors) && !null_element) {
+            if (this.arrayCheck(colors) && null_element==false) {
                 count++;
             }
         }
@@ -62,14 +61,18 @@ public class CommonGoal_6 extends CommonGoal {
      * @return True if all elements in the array are unique, false otherwise.
      */
     public boolean arrayCheck(String[] array) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = i + 1; j < array.length; j++) {
-                if (array[i].equals(array[j])) {
-                    return false;
+    	if(array!=null)
+    	{
+    		for (int i = 0; i < array.length; i++) {
+                for (int j = i + 1; j < array.length; j++) {
+                    if (array[i].equals(array[j])) {
+                        return false;
+                    }
                 }
             }
-        }
-        return true;
+            return true;
+    	}
+        return false;
     }
 
     /**
@@ -78,6 +81,7 @@ public class CommonGoal_6 extends CommonGoal {
      * @param matrix The matrix of cards.
      * @return The updated matrix with null elements replaced by "N".
      */
+    /*
     private Card[][] setNullToString(Card[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
@@ -96,12 +100,12 @@ public class CommonGoal_6 extends CommonGoal {
         }
         return matrix;
     }
-
+	*/
     /**
      * Prints the description of the common goal.
      */
     @Override
     public void output() {
-        System.out.println("Two columns made by six cards of the same color");
+        System.out.println("Two columns made by six cards of all different colors");
     }
 }

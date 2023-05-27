@@ -35,7 +35,6 @@ public class CommonGoal_5 extends CommonGoal {
     @Override
     public boolean checkGoal(Player player) {
         Card[][] matrix = player.getLibrary().getMatrix();
-        matrix=this.setNullToString(matrix);
         int count = 0; // Counter for the found groups
 
         // Scan the rows
@@ -45,23 +44,23 @@ public class CommonGoal_5 extends CommonGoal {
                 String current = matrix[i][j].getColor();
 
                 // Check if there are four equal strings in the same row
-                if (j + 3 < matrix[i].length && current!="N" && current.equals(matrix[i][j + 1].getColor()) && current.equals(matrix[i][j + 2].getColor()) && current.equals(matrix[i][j + 3].getColor())) {
+                if (j + 3 < matrix[i].length && current!=null && current.equals(matrix[i][j + 1].getColor()) && current.equals(matrix[i][j + 2].getColor()) && current.equals(matrix[i][j + 3].getColor())) {
                     count++;
-                    // Set the strings in the group to "N"
-                    matrix[i][j].setColor("N");
-                    matrix[i][j + 1].setColor("N");
-                    matrix[i][j + 2].setColor("N");
-                    matrix[i][j + 3].setColor("N");
+                    // Set the strings in the group to null
+                    matrix[i][j].setColor(null);
+                    matrix[i][j + 1].setColor(null);
+                    matrix[i][j + 2].setColor(null);
+                    matrix[i][j + 3].setColor(null);
                 }
 
                 // Check if there are four equal strings in the same column
-                if (i + 3 < matrix.length && !current.equals("N") && current.equals(matrix[i + 1][j].getColor()) && current.equals(matrix[i + 2][j].getColor()) && current.equals(matrix[i + 3][j].getColor())) {
+                if (i + 3 < matrix.length && current!=null && current.equals(matrix[i + 1][j].getColor()) && current.equals(matrix[i + 2][j].getColor()) && current.equals(matrix[i + 3][j].getColor())) {
                     count++;
-                    // Set the strings in the group to "N"
-                    matrix[i][j].setColor("N");
-                    matrix[i + 1][j].setColor("N");
-                    matrix[i + 2][j].setColor("N");
-                    matrix[i + 3][j].setColor("N");
+                    // Set the strings in the group to null
+                    matrix[i][j].setColor(null);
+                    matrix[i + 1][j].setColor(null);
+                    matrix[i + 2][j].setColor(null);
+                    matrix[i + 3][j].setColor(null);
                 }
             }
         }
@@ -69,17 +68,17 @@ public class CommonGoal_5 extends CommonGoal {
         return count >= 4;
     }
     /**
-     * Sets any null elements in the matrix to the string "N".
+     * Sets any null elements in the matrix to the string null.
      *
      * @param matrix The matrix of cards.
-     * @return The updated matrix with null elements replaced by "N".
+     * @return The updated matrix with null elements replaced by null.
      */
-	private Card[][] setNullToString(Card[][] matrix) 
+	/*private Card[][] setNullToString(Card[][] matrix) 
 	{
 		for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 if (matrix[i][j].getColor() == null) {
-                    matrix[i][j].setColor("N");
+                    matrix[i][j].setColor(null);
                 }
             }
         }
@@ -91,7 +90,7 @@ public class CommonGoal_5 extends CommonGoal {
             }
             System.out.println();
         }
-        */
+        
 		return matrix;		
-	}
+	}*/
 }
