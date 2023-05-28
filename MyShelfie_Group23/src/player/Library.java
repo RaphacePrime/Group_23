@@ -18,32 +18,19 @@ public class Library {
 		this.matrix = new Card[6][5];
 				
 	}
-
-/**	public boolean isOccupied()
-	{
-		if (!this.isLegalTile())
-		{
-			return false;
-		}
-		else if (this.card != null)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	*/
+	
+	
 	public boolean checkFullness()
 	{
 		return true;
 	}
 	
-	public boolean insertInLibrary(ArrayList<Card> chosen, int cloumn)
+	
+	public void insertInLibrary(ArrayList<Card> chosen, int cloumn)
 	{	
 		Scanner sc;
 		int Column;
+		int EmptySpace=0;
 		do {	
 			int row;
 			do {
@@ -51,15 +38,29 @@ public class Library {
 					sc = new Scanner(System.in);
 					Column = sc.nextInt();
 			}while(Column<1 && Column > 5); 
+			
+			for (row = 5; row > 0; row--) 
+			{
+				
+				if(matrix[Column][row]!=null) 
+				{ 
+					break;
+				}
+				else 
+				{
+					EmptySpace++;
+				}
+				
+			}
 	
-		}while(matrix[Column][1]!=null);{
+		}while(chosen.size() > EmptySpace);{
 			System.out.print("the chosen COLUMN is currently full");
 		}
 		
-		
+		int SelectedCard=1;
 		for (int row = 5; row > 0; row--) 
 		{
-			int SelectedCard=1;
+			
 			if(matrix[Column][row]!=null) 
 			{ 
 				break;
@@ -68,26 +69,14 @@ public class Library {
 				matrix[Column][row]= chosen.get(SelectedCard);
 				chosen.remove(SelectedCard);
 				sc.close();
+				SelectedCard++;
 			}
-			SelectedCard++;
-		}
-	}
-		
-		
-		/**for (int row = 0; row < 6;row++) {
-			for (Card tile : matrix[row])
-			{
-				if(!tile.isOccupied())
-				{	
-					return false;
-				}else
-					Card[row]= card.chosen; //non so quale sia la funzione che va a prendere le carte dalla board
-				row++;
-		}
-		*/
 			
-	
+		}
+		
 	}
+		
+	
 
 	public void output()
 	{
