@@ -192,34 +192,34 @@ public class LivingRoom
 	
 	private int hasNeighbours (int x, int y)
 	{
-		int neighbours = 4;
+		int neighbours = 0;
 		
 		if (x != 0) 
 		{
-			if (!matrix[x - 1][y].isOccupied()) 
+			if (matrix[x - 1][y].isOccupied()) 
 			{
-				neighbours--;
+				neighbours++;
 			}
 		}
 		if (x != 8) 
 		{
-			if (!matrix[x + 1][y].isOccupied()) 
+			if (matrix[x + 1][y].isOccupied()) 
 			{
-				neighbours--;
+				neighbours++;
 			}
 		}
 		if (y != 0)
 		{
-			if (!matrix[x][y - 1].isOccupied()) 
+			if (matrix[x][y - 1].isOccupied()) 
 			{
-				neighbours--;
+				neighbours++;
 			}
 		}
 		if (y != 8) 
 		{
-			if (!matrix[x][y + 1].isOccupied())
+			if (matrix[x][y + 1].isOccupied())
 			{
-				neighbours--;
+				neighbours++;
 			}
 		}
 		return neighbours;
