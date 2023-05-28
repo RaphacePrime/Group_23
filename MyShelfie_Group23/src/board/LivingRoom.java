@@ -148,21 +148,25 @@ public class LivingRoom
 		switch (direction)
 		{
 		case "N":
-			yAxisShift = -1;
-			break;
-		case "S":
-			yAxisShift = 1;
-			break;
-		case "W":
 			xAxisShift = -1;
 			break;
-		case "E":
+		case "S":
 			xAxisShift = 1;
+			break;
+		case "W":
+			yAxisShift = -1;
+			break;
+		case "E":
+			yAxisShift = 1;
+			break;
 		}
+		System.out.println("step1");
 		for (int i=0; i < numberOfCards; i++)
 		{
+			System.out.println("Step2");
 			if(!isRemovable(x + i*xAxisShift,y + i*yAxisShift))
 			{
+				System.out.println("Step3");
 				return false;
 			}
 		}
@@ -191,34 +195,34 @@ public class LivingRoom
 	
 	private int hasNeighbours (int x, int y)
 	{
-		int neighbours = 0;
+		int neighbours = 4;
 		
 		if (x != 0) 
 		{
-			if (matrix[x - 1][y].isOccupied()) 
+			if (!matrix[x - 1][y].isOccupied()) 
 			{
-				neighbours++;
+				neighbours--;
 			}
 		}
 		if (x != 8) 
 		{
-			if (matrix[x + 1][y].isOccupied()) 
+			if (!matrix[x + 1][y].isOccupied()) 
 			{
-				neighbours++;
+				neighbours--;
 			}
 		}
 		if (y != 0)
 		{
-			if (matrix[x][y - 1].isOccupied()) 
+			if (!matrix[x][y - 1].isOccupied()) 
 			{
-				neighbours++;
+				neighbours--;
 			}
 		}
 		if (y != 8) 
 		{
-			if (matrix[x][y + 1].isOccupied())
+			if (!matrix[x][y + 1].isOccupied())
 			{
-				neighbours++;
+				neighbours--;
 			}
 		}
 		return neighbours;
@@ -242,16 +246,16 @@ public class LivingRoom
 		switch (direction)
 		{
 		case "N":
-			yAxisShift = -1;
-			break;
-		case "S":
-			yAxisShift = 1;
-			break;
-		case "W":
 			xAxisShift = -1;
 			break;
-		case "E":
+		case "S":
 			xAxisShift = 1;
+			break;
+		case "W":
+			yAxisShift = -1;
+			break;
+		case "E":
+			yAxisShift = 1;
 		}
 		for (int i=0; i < numberOfCards; i++)
 		{
