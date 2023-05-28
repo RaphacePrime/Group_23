@@ -7,7 +7,7 @@ import model.Game;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.print("Insert number of player: ");
+		System.out.print("Insert number of players: ");
 		Scanner sc = new Scanner(System.in);
 		sc.reset();
 		String string_number_of_players=sc.nextLine();

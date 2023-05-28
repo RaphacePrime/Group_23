@@ -160,13 +160,10 @@ public class LivingRoom
 			yAxisShift = 1;
 			break;
 		}
-		System.out.println("step1");
 		for (int i=0; i < numberOfCards; i++)
 		{
-			System.out.println("Step2");
 			if(!isRemovable(x + i*xAxisShift,y + i*yAxisShift))
 			{
-				System.out.println("Step3");
 				return false;
 			}
 		}

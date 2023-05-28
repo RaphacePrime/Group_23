@@ -201,6 +201,7 @@ public class Game
      */
 	public void chooseCard()
 	{
+		this.living_room.output();
 		// coordinates, direction, number of cards
 		ArrayList<Card> chosen = new ArrayList<Card>();//list for the chosen cards
 		Scanner sc=new Scanner(System.in);
@@ -214,7 +215,7 @@ public class Game
 			System.out.println("Insert y coordinate of first card: ");
 			String sy=sc.nextLine(); int y=Integer.parseInt(sy);
 			System.out.println("Insert the direction of the next cards(N-E-S-W): ");
-			String direction=sc.nextLine();
+			String direction=sc.nextLine().toUpperCase();
 			while(!direction.equals("N")&&!direction.equals("S")&&!direction.equals("W")&&!direction.equals("E"))
 			{
 				System.out.println("You must choose N or E or S or W");
