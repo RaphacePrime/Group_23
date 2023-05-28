@@ -23,7 +23,7 @@ public class CommonGoal_5 extends CommonGoal {
      */
     @Override
     public void output() {
-        System.out.println("4 groups made by 4 cards of the same type");
+        System.out.println("Four groups made by four cards of the same type");
     }
 
     /**

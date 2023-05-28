@@ -151,7 +151,7 @@ public class Game
 						exit=true;
 					}
 					savePlayer();//saving the modification added to active_player
-					System.out.println(this.active_player.getName()+"has ended his turn...");
+					System.out.println(this.active_player.getName()+" has ended his turn...");
 					nextPlayer();//switching active_player to next Player in array player
 					System.out.println("The next player is "+this.active_player.getName());
 					if(this.active_player.getChair()==true && exit==true)
@@ -218,7 +218,8 @@ public class Game
 			while(!direction.equals("N")&&!direction.equals("S")&&!direction.equals("W")&&!direction.equals("E"))
 			{
 				System.out.println("You must choose N or E or S or W");
-				direction=sc.nextLine();						
+				direction=sc.nextLine();	
+				direction.toUpperCase();
 			}
 			System.out.print(this.active_player.getName()+", insert the amount of cards you want to pick(1,2,3) :");
 			int n_ofcards=scint.nextInt();//asking the player how many cards he want to pick
@@ -227,6 +228,7 @@ public class Game
 				System.out.print("You must select a number between 1 and 3: ");
 				n_ofcards=scint.nextInt();
 			}
+			//this.living_room.controlChosenCards(x,y,direction, n_ofcards)
 			if(this.living_room.controlChosenCards(x,y,direction, n_ofcards))//if the control in livingroom permits picking the cards, they get removed from the table
 			{
 				control=true;
@@ -305,8 +307,8 @@ public class Game
 			System.out.print("Press ENTER key to continue....");
 			sc.nextLine();
 		}
-		System.out.print("Press ENTER key to continue....");
-		sc.nextLine();
+		//System.out.print("Press ENTER key to continue....");
+		//sc.nextLine();
 	}
 	
 	/**

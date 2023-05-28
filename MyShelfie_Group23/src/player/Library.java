@@ -8,79 +8,81 @@ import board.LivingRoomTile;
 public class Library {
 	
 	private Card matrix[][];
-	private Card card;
 	//private final boolean legalTile;
 	
 	public Library()
 	{
 		//this.legalTile = legalTile;
-		this.card = null;
 		this.matrix = new Card[6][5];
+		for(int i=0; i<6; i++)
+		{
+			for(int y=0; y<5;y++)
+			{
+				matrix[i][y]= new Card();
+			}
+		}
 				
 	}
-	
 	
 	public boolean checkFullness()
 	{
 		return true;
 	}
 	
-	
-	public void insertInLibrary(ArrayList<Card> chosen, int cloumn)
+	public boolean insertInLibrary(ArrayList<Card> chosen, int column)
 	{	
-		Scanner sc;
-		int Column;
-		int EmptySpace=0;
-		do {	
-			int row;
-			do {
-					System.out.println("insert the COLUMN in which you want to put the card. positions go from 1 to 5");
-					sc = new Scanner(System.in);
-					Column = sc.nextInt();
-			}while(Column<1 && Column > 5); 
-			
-			for (row = 5; row > 0; row--) 
+		int num_elements=chosen.size();
+		column--;
+		int count=0;
+		for(int i=0; i<6; i++)
+		{
+			if(matrix[i][column].getColor()==null)
 			{
-				
-				if(matrix[Column][row]!=null) 
-				{ 
+				count++;
+			}
+		}
+		if(count<num_elements)
+		{
+			return false;
+		}
+		while(!chosen.isEmpty())
+		{
+			System.out.println("Choose which card you want to insert: ");
+			int i=1;
+			for(Card c:chosen)
+			{
+				System.out.print(i+") "+c.getColor()+" ");
+				i++;
+			}
+			Scanner sc = new Scanner(System.in);
+			int input= sc.nextInt();
+			while(input<=0 && input>num_elements)
+			{
+				System.out.println("You have to insert a valid option!");
+				input=sc.nextInt();
+			}
+			for(int y=5; y>=0; y--)
+			{
+				if(matrix[y][column].getColor()==null || matrix[y][column].getColor().equals("N"))
+				{
+					matrix[y][column]=chosen.remove(input-1);
 					break;
 				}
-				else 
-				{
-					EmptySpace++;
-				}
-				
 			}
-	
-		}while(chosen.size() > EmptySpace);{
-			System.out.print("the chosen COLUMN is currently full");
 		}
-		
-		int SelectedCard=0;
-		for (int row = 5; row > 0; row--) 
-		{
-			
-			if(matrix[Column][row]!=null) 
-			{ 
-				break;
-			}else 
-			{
-				matrix[Column][row]= chosen.get(SelectedCard);
-				chosen.remove(SelectedCard);
-				sc.close();
-				SelectedCard++;
-			}
-			
-		}
-		
+		System.out.println("Library updated: ");
+		this.output();
+		return true;
 	}
-		
-	
 
 	public void output()
 	{
-		
+		for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j].getColor()+" ");//da sistemare
+            }
+            System.out.println(" ");
+        }
 	}
 
 	public Card[][] getMatrix() {
@@ -91,3 +93,5 @@ public class Library {
 		this.matrix = matrix;
 	}
 }
+
+

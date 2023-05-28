@@ -39,7 +39,7 @@ public class CommonGoal_6 extends CommonGoal {
         for (int col = 0; col < 5; col++) {
             boolean null_element = false;
             String[] colors = new String[6]; // Variable for line count, when the column is swapped, it resets
-            System.out.print("Column " + col + ": ");
+            //System.out.print("Column " + col + ": ");
             for (int lin = 0; lin < 6; lin++) {
                 if (matrix[lin][col].getColor()==null) {
                     null_element = true;
@@ -47,9 +47,14 @@ public class CommonGoal_6 extends CommonGoal {
                     colors[lin] = matrix[lin][col].getColor();
                 }
             }
-            if (this.arrayCheck(colors) && null_element==false) {
-                count++;
+            if(!null_element)
+            {
+            	if (this.arrayCheck(colors)) 
+            	{
+                    count++;
+                }
             }
+            
         }
         return count >= 2;
     }
@@ -75,32 +80,6 @@ public class CommonGoal_6 extends CommonGoal {
         return false;
     }
 
-    /**
-     * Sets any null elements in the matrix to the string "N".
-     *
-     * @param matrix The matrix of cards.
-     * @return The updated matrix with null elements replaced by "N".
-     */
-    /*
-    private Card[][] setNullToString(Card[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j].getColor() == null) {
-                    matrix[i][j].setColor("N");
-                }
-            }
-        }
-
-        // Print the updated matrix
-        for (Card[] row : matrix) {
-            for (Card element : row) {
-                System.out.print(element.getColor() + " ");
-            }
-            System.out.println();
-        }
-        return matrix;
-    }
-	*/
     /**
      * Prints the description of the common goal.
      */
