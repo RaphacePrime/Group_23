@@ -57,7 +57,7 @@ public class Library {
 			System.out.print("the chosen COLUMN is currently full");
 		}
 		
-		int SelectedCard=1;
+		int SelectedCard=0;
 		for (int row = 5; row > 0; row--) 
 		{
 			
