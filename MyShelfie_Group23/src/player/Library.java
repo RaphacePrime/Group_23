@@ -77,12 +77,30 @@ public class Library {
 
 	public void output()
 	{
+		System.out.println("\n\t   Columns\n\t1  2  3  4  5");
 		for (int i = 0; i < matrix.length; i++) {
+			System.out.print("\t");
             for (int j = 0; j < matrix[i].length; j++) {
-                System.out.print(matrix[i][j].getColor()+" ");//da sistemare
+                String tileColor = matrix[i][j].getColor();
+                if(tileColor == null) {
+					System.out.print("\u001B[30m" + "*  " + "\u001B[0m");
+                }else if(tileColor.equals("yellow")) {
+					System.out.print("\u001B[33m" + "#  " + "\u001B[0m");
+				}else if(tileColor.equals("pink")) {
+					System.out.print("\u001B[31m" + "#  " + "\u001B[0m");
+				}else if(tileColor.equals("blue")) {
+					System.out.print("\u001B[34m" + "#  " + "\u001B[0m");
+				}else if(tileColor.equals("green")) {
+					System.out.print("\u001B[32m" + "#  " + "\u001B[0m");
+				}else if(tileColor.equals("cyan")) {
+					System.out.print("\u001B[36m" + "#  " + "\u001B[0m");
+				}else if(tileColor.equals("white")) {
+					System.out.print("\u001B[37m" + "#  " + "\u001B[0m");
+				}
             }
-            System.out.println(" ");
+            System.out.println();
         }
+		System.out.println();
 	}
 
 	public Card[][] getMatrix() {
