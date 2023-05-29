@@ -23,6 +23,7 @@ public class CommonGoal_7 extends CommonGoal {
 						&& matrix[i + 1][j + 1].getColor().equals(matrix[i][j].getColor())) {
 
 					count++;
+					j++;
 				}
 			}
 		}
