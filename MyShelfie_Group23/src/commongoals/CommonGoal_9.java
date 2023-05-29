@@ -28,11 +28,11 @@ public class CommonGoal_9 extends CommonGoal{
 			}
 		}
 		if(countC>=3) {
-			return true;
+			return false;
 			
 		}else {
 			
-		return false;
+		return true;
 	}
 	}
 	@Override
