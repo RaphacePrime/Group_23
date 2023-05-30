@@ -3,48 +3,77 @@ package commongoals;
 import board.Card;
 import player.Player;
 
-public class CommonGoal_8 extends CommonGoal{
+public class CommonGoal_8 extends CommonGoal
+{
 
-	public CommonGoal_8(int id) {
+	public CommonGoal_8(int id)
+	{
 		super(id);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public boolean checkGoal(Player player) {
-		int i , k = 0, count = 0;
+	public boolean checkGoal(Player player)
+	{
 		Card[][] matrix = player.getLibrary().getMatrix();
-		String row[] = new String[6];
-		
-		for(k=0;k<6;k++) {
-			for(i = 0; i<5;i++) {
-				row[i]=matrix[k][i].getColor();
+		int count = 0; boolean null_control;
+		String row[] = new String[5];
+		for (int k = 0; k < 6; k++)
+		{
+			null_control=true;
+			for (int i = 0; i < 5; i++)
+			{
+				if (matrix[k][i].getColor() == null)
+				{
+					null_control=false;
+					break;
+				}
+				else
+				{
+					row[i] = matrix[k][i].getColor();
+				}
 			}
-			if(checkRow(row)) {
-				count++;
+			if (null_control)
+			{
+				if(this.arrayCheck(row))
+				{
+					count++;
+				}
+				
 			}
-			if(count >= 2) {
-				return true;
-			}
+
+		}
+		if (count >= 2)
+		{
+			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public void output() {
+	public void output()
+	{
 		System.out.println("Two lines each made up of 5 different types of tiles.");
-		
+
 	}
-	public boolean checkRow(String  row[]) {
-		int i,k;
-		for(i=0;i<5;i++) {
-			for(k=0;k<6;k++) {
-				if((row[i]==row[k])&&(i!=k)) {
-					return false;
+
+	public boolean arrayCheck(String[] array)
+	{
+		if (array != null)
+		{
+			for (int i = 0; i < array.length; i++)
+			{
+				for (int j = i + 1; j < array.length; j++)
+				{
+					if (array[i].equals(array[j]))
+					{
+						return false;
+					}
 				}
 			}
+			return true;
 		}
-		return true;
+		return false;
 	}
-	
+
 }

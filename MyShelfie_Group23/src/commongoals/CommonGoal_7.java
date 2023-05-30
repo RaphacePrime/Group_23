@@ -27,6 +27,7 @@ public class CommonGoal_7 extends CommonGoal {
 				}
 			}
 		}
+		//System.out.println("Count: "+count);
 		if (count >= 2) {
 
 			return true;

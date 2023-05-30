@@ -40,7 +40,7 @@ public class Game
 		createPlayers();
 		setPersonalGoal();//calling the function to pick the personal goals
 		System.out.println("");
-		System.out.print("Press enter to randomly decide who get the chair and starts to play....");
+		System.out.print("Press ENTER to randomly decide who get the chair and starts to play....");
 		Scanner sc= new Scanner(System.in);
 		sc.nextLine();
 		Random random = new Random();//deciding who starts
@@ -49,13 +49,14 @@ public class Game
 		System.out.println("The player that recive the chair is "+players.get(this.index_players).getName()+"!!!");
 		this.active_player=this.players.get(index_players);//setting the active player
 		System.out.println("");
-		System.out.print("Press enter to extract 2 Common Goals....");
+		System.out.print("Press ENTER to extract 2 Common Goals....");
 		sc.reset();
 		sc.nextLine();
 		setCommonGoals();
 		System.out.println("The Common Goals have been extracted :");
 		System.out.print("1) ");this.common_goals[0].output();
 		System.out.print("2) ");this.common_goals[1].output();
+		System.out.println("");
 		this.living_room= new LivingRoom(this.number_of_players, cards);
 	}
 	
@@ -88,15 +89,22 @@ public class Game
 		{
 			System.out.println("");
 			System.out.println(this.active_player.getName()+"'s turn");
-			System.out.println("Select a option in the MENU': ");
-			System.out.println("1)Show the LIVING ROOM");
-			System.out.println("2)Show your LIBRARY");
-			System.out.println("3)Show the COMMON GOALS");
-			System.out.println("4)Show your PERSONAL GOALS");
-			System.out.println("5)Choose the cards from the LIVING ROOM and insert in LIBRARY");
-			System.out.print("Insert your choice: ");
-			String string_choice=sc.nextLine();
-			int choice=Integer.parseInt(string_choice);
+			System.out.println("\tSelect a option in the MENU': ");
+			System.out.println("\t1)Show the LIVING ROOM");
+			System.out.println("\t2)Show your LIBRARY");
+			System.out.println("\t3)Show the COMMON GOALS");
+			System.out.println("\t4)Show your PERSONAL GOALS");
+			System.out.println("\t5)Choose the cards from the LIVING ROOM and insert in LIBRARY");
+			int choice;
+			do {
+				System.out.print("Insert your choice (1 to 5): ");
+				String string_choice=sc.nextLine();
+				try {
+					choice=Integer.parseInt(string_choice);
+				}catch(NumberFormatException e) {
+					choice = 0;
+				}
+			}while(choice<=0 || choice>=6);
 			switch(choice)
 			{
 				case 1:
@@ -125,6 +133,7 @@ public class Game
 					{
 						System.out.println("- IN PROGRESS");
 					}
+					System.out.println("");
 					break;
 				case 4:
 					this.active_player.getPersonalGoal().output();
@@ -208,6 +217,13 @@ public class Game
 	public void chooseCard()
 	{
 		System.out.println("");
+		System.out.println(""+this.active_player.getName()+"'s library: ");
+		this.active_player.getLibrary().output();
+		System.out.println("");
+		System.out.println(""+this.active_player.getName()+"'s Personal Goal: ");
+		this.active_player.getPersonalGoal().output();
+		System.out.println("");
+		System.out.println("The living room: ");
 		this.living_room.output();
 		// coordinates, direction, number of cards
 		ArrayList<Card> chosen = new ArrayList<Card>();//list for the chosen cards
@@ -217,10 +233,29 @@ public class Game
 		while(control==false)
 		{
 			//asking the coordinates of the first card
-			System.out.println("Insert x coordinate of first card: ");
-			String sx=sc.nextLine(); int x=Integer.parseInt(sx);
-			System.out.println("Insert y coordinate of first card: ");
-			String sy=sc.nextLine(); int y=Integer.parseInt(sy);
+			
+			int x;
+			do {
+				System.out.println("Insert x coordinate of first card: ");
+				String sx=sc.nextLine();
+				try {
+					x=Integer.parseInt(sx);
+				}catch(NumberFormatException e) {
+					x = 0;
+				}
+			}while(x<=0 || x>=10);
+
+			
+			int y;
+			do {
+				System.out.println("Insert y coordinate of first card: ");
+				String sy=sc.nextLine();
+				try {
+					y=Integer.parseInt(sy);
+				}catch(NumberFormatException e) {
+					y = 0;
+				}
+			}while(y<=0 || y>=10);
 			System.out.println("Insert the direction of the next cards(N-E-S-W): ");
 			String direction=sc.nextLine().toUpperCase();
 			while(!direction.equals("N")&&!direction.equals("S")&&!direction.equals("W")&&!direction.equals("E"))
@@ -432,3 +467,6 @@ public class Game
 		
 	}
 }
+
+
+

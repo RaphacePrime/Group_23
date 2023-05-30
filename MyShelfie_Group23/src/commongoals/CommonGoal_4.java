@@ -1,4 +1,7 @@
 package commongoals;
+
+import java.util.ArrayList;
+
 import board.Card;
 
 import player.Player;
@@ -10,7 +13,8 @@ import player.Player;
  * combination compared to another line.
  */
 
-public class CommonGoal_4 extends CommonGoal {
+public class CommonGoal_4 extends CommonGoal
+{
 
 	/**
 	 * Constructor for the CommonGoal_4 class.
@@ -18,7 +22,8 @@ public class CommonGoal_4 extends CommonGoal {
 	 * @param id the ID of the common goal
 	 */
 
-	public CommonGoal_4(int id) {
+	public CommonGoal_4(int id)
+	{
 		super(id);
 // TODO Auto-generated constructor stub
 	}
@@ -31,36 +36,49 @@ public class CommonGoal_4 extends CommonGoal {
 	 */
 
 	@Override
-	public boolean checkGoal(Player player) {
+	public boolean checkGoal(Player player)
+	{
 		Card[][] matrix = player.getLibrary().getMatrix();
-		int count = 0;
-		int countL = 0;
-
-		for (int i = 0; i < matrix[0].length - 1; i++) {
-
-			for (int j = 0; j < matrix.length; j++) {
-				if (matrix[i][j].getColor() != null && matrix[i][j].getColor().isEmpty() && matrix[i][j].getColor() != matrix[i][0].getColor()) {
-					count++;
+		int count = 0; boolean null_control;
+		ArrayList<String> list= new ArrayList<String>();
+		for (int k = 0; k < 6; k++)
+		{
+			list.clear();
+			null_control=true;
+			for (int i = 0; i < 5; i++)
+			{
+				
+				if (matrix[k][i].getColor() == null)
+				{
+					null_control=false;
+					break;
+				} 
+				else
+				{
+					if(!list.contains(matrix[k][i].getColor()))
+					{
+						list.add(matrix[k][i].getColor());
+					}					
 				}
+			}
+			if (list.size()<=3 && null_control)
+			{
+				count++;
+			}
 
-			}
-			if (count <= 3) {
-				countL++;
-			}
 		}
-		if (countL >= 4) {
-			return false;
-
-		} else {
-
+		if (count >= 4)
+		{
 			return true;
 		}
+		return false;
 	}
 
 	// Prints a message describing the common goal.
 
 	@Override
-	public void output() {
+	public void output()
+	{
 		System.out.println(
 				"Four lines each formed by 5 tiles of maximum three different types. One line can show the same or a different combination of another line.");
 
