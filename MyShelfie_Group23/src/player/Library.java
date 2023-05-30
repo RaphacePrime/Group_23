@@ -55,28 +55,44 @@ public class Library {
 		}
 		while(!chosen.isEmpty())
 		{
-			System.out.println("Choose which card you want to insert: ");
-			int i=1;
-			for(Card c:chosen)
+			num_elements=chosen.size();
+			if(num_elements==1)
 			{
-				System.out.print(i+") "+c.getColor()+" ");
-				i++;
-			}
-			Scanner sc = new Scanner(System.in);
-			int input= sc.nextInt();
-			while(input<=0 && input>num_elements)
-			{
-				System.out.println("You have to insert a valid option!");
-				input=sc.nextInt();
-			}
-			for(int y=5; y>=0; y--)
-			{
-				if(matrix[y][column].getColor()==null || matrix[y][column].getColor().equals("N"))
+				for(int y=5; y>=0; y--)
 				{
-					matrix[y][column]=chosen.remove(input-1);
-					break;
+					if(matrix[y][column].getColor()==null || matrix[y][column].getColor().equals("N"))
+					{
+						matrix[y][column]=chosen.remove(0);
+						break;
+					}
 				}
 			}
+			else
+			{
+				System.out.println("Choose which card you want to insert: ");
+				int i=1;
+				for(Card c:chosen)
+				{
+					System.out.print(i+") "+c.getColor()+" ");
+					i++;
+				}
+				Scanner sc = new Scanner(System.in);
+				int input= sc.nextInt();
+				while(input<=0 && input>num_elements)
+				{
+					System.out.println("You have to insert a valid option!");
+					input=sc.nextInt();
+				}
+				for(int y=5; y>=0; y--)
+				{
+					if(matrix[y][column].getColor()==null || matrix[y][column].getColor().equals("N"))
+					{
+						matrix[y][column]=chosen.remove(input-1);
+						break;
+					}
+				}
+			}
+			
 		}
 		System.out.println("Library updated: ");
 		this.output();
