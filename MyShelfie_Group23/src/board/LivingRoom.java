@@ -60,7 +60,7 @@ public class LivingRoom
 		{
 			for (LivingRoomTile tile : matrix[x])
 			{
-				if (tile.isLegalTile())
+				if (tile.isLegalTile() && !tile.isOccupied())
 				{
 					tile.setCard(cards.remove(0));	
 				}
