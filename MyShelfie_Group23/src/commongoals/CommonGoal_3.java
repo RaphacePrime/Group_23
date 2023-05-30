@@ -3,12 +3,22 @@ package commongoals;
 import player.*;
 import board.*;
 
+/**
+ * Common Goal 3: Checks if the cards in the four corners of the library all have the same color.
+ */
 public class CommonGoal_3 extends CommonGoal{
 
+	/**
+	 * Constructs a CommonGoal_3 object with the specified ID.
+	 * @param id The ID of the common goal.
+	 */
 	public CommonGoal_3(int id) {
 		super(id);
 	}
 
+	/**
+	 * Checks if the conditions of the goal are met by the player.
+	 */
 	@Override
 	public boolean checkGoal(Player player) {
 		Card[][] matrix = player.getLibrary().getMatrix();
@@ -29,6 +39,9 @@ public class CommonGoal_3 extends CommonGoal{
 		}
 	}
 
+	/**
+	 * Prints the description of the common goal.
+	 */
 	@Override
 	public void output() {
 		System.out.println("Four cards of the same colour in the four corners of the bookshelf");

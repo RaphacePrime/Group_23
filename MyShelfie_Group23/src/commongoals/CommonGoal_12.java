@@ -3,12 +3,22 @@ package commongoals;
 import board.Card;
 import player.Player;
 
+/**
+ * Common Goal 12: Checks if there is a "staircase" 5x5 shape in the library, this shape can be mirrored horizontally, but not vertically.  
+ */
 public class CommonGoal_12 extends CommonGoal{
 
+	/**
+	 * Constructs a CommonGoal_12 object with the specified ID.
+	 * @param id The ID of the common goal.
+	 */
 	public CommonGoal_12(int id) {
 		super(id);
 	}
 
+	/**
+	 * Checks if the conditions of the goal are met by the player.
+	 */
 	@Override
 	public boolean checkGoal(Player player) {
 		Card[][] matrix = player.getLibrary().getMatrix();
@@ -38,6 +48,9 @@ public class CommonGoal_12 extends CommonGoal{
 		return false;
 	}
 
+	/**
+	 * Prints the description of the common goal.
+	 */
 	@Override
 	public void output() {
 		System.out.println("Five columns of increasing or decreasing \r\n"
