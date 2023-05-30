@@ -24,14 +24,14 @@ public class CommonGoal_1 extends CommonGoal{
             return contaCoppie(matrix,used,i +1 ,0);
         }
         int coppie = contaCoppie(matrix,used,i , j +1);
-        if (j +1 < matrix[i].length && matrix[i][j].getColor().equals(matrix[i][j +1].getColor()) && !used[i][j] && !used[i][j +1]&&matrix[i][j]!=null) {
+        if (j +1 < matrix[i].length && matrix[i][j].getColor().equals(matrix[i][j +1].getColor()) && !used[i][j] && !used[i][j +1]&&matrix[i][j].getColor()!=null) {
             used[i][j] = true;
             used[i][j +1] = true;
             coppie = Math.max(coppie , contaCoppie(matrix,used,i , j +1) +1);
             used[i][j] = false;
             used[i][j +1] = false;
         }
-        if (i +1 < matrix.length && matrix[i][j].getColor().equals(matrix[i +1][j].getColor())  && !used[i][j] && !used[i +1][j]&&matrix[i][j]!=null) {
+        if (i +1 < matrix.length && matrix[i][j].getColor().equals(matrix[i +1][j].getColor())  && !used[i][j] && !used[i +1][j]&&matrix[i][j].getColor()!=null) {
         	used[i][j] = true;
         	used[i +1][j] = true;
             coppie = Math.max(coppie , contaCoppie(matrix,used,i , j +1) +1);
