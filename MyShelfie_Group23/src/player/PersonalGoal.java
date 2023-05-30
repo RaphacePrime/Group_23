@@ -143,28 +143,30 @@ public class PersonalGoal
 	public void output () 
 	{
 		
-		for(int i=0; i < 6; i++) {
+		System.out.println("\n\t   Columns\n\t1  2  3  4  5");
+		
+		for(int i=0; i < matrix.length; i++) {
 			
-			for(int j =0; j < 5; j++) {
-				
+			for(int j =0; j < matrix[i].length; j++) {
+				System.out.print("\t");
 				if(matrix[i][j] == null){
 					
-					System.out.print("\u001B[30m" + "*\t" + "\u001B[0m");
+					System.out.print("\u001B[30m" + "* " + "\u001B[0m");
 					
 				}else {
 					
 					if(matrix[i][j].equals("yellow")) {
-						System.out.print("\u001B[33m" + "*\t" + "\u001B[0m");
+						System.out.print("\u001B[33m" + "# " + "\u001B[0m");
 					}else if(matrix[i][j].equals("pink")) {
-						System.out.print("\u001B[31m" + "*\t" + "\u001B[0m");
+						System.out.print("\u001B[31m" + "# " + "\u001B[0m");
 					}else if(matrix[i][j].equals("blue")) {
-						System.out.print("\u001B[34m" + "*\t" + "\u001B[0m");
+						System.out.print("\u001B[34m" + "# " + "\u001B[0m");
 					}else if(matrix[i][j].equals("green")) {
-						System.out.print("\u001B[32m" + "*\t" + "\u001B[0m");
+						System.out.print("\u001B[32m" + "# " + "\u001B[0m");
 					}else if(matrix[i][j].equals("cyan")) {
-						System.out.print("\u001B[36m" + "*\t" + "\u001B[0m");
+						System.out.print("\u001B[36m" + "# " + "\u001B[0m");
 					}else if(matrix[i][j].equals("white")) {
-						System.out.print("\u001B[37m" + "*\t" + "\u001B[0m");
+						System.out.print("\u001B[37m" + "# " + "\u001B[0m");
 					}
 				}
 				

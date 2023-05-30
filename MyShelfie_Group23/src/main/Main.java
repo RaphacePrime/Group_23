@@ -7,16 +7,25 @@ import model.Game;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.print("Insert number of player: ");
+		System.out.print("Insert number of players: ");
 		Scanner sc = new Scanner(System.in);
 		sc.reset();
 		String string_number_of_players=sc.nextLine();
-		int number_of_players=Integer.parseInt(string_number_of_players);
+		int number_of_players;
+		try {
+			number_of_players=Integer.parseInt(string_number_of_players);
+		}catch(NumberFormatException e) {
+			number_of_players = 0;
+		}
 		while(number_of_players<2||number_of_players>4)
 		{
 			System.out.print("Insert a number between 2 and 4: ");
 			string_number_of_players=sc.nextLine();
-			number_of_players=Integer.parseInt(string_number_of_players);
+			try {
+				number_of_players=Integer.parseInt(string_number_of_players);
+			} catch(NumberFormatException e) {
+				number_of_players = 0;
+			}
 		}
 		System.out.println("Press ENTER key to start...");
 		sc.nextLine();

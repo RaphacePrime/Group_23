@@ -148,16 +148,17 @@ public class LivingRoom
 		switch (direction)
 		{
 		case "N":
-			yAxisShift = -1;
-			break;
-		case "S":
-			yAxisShift = 1;
-			break;
-		case "W":
 			xAxisShift = -1;
 			break;
-		case "E":
+		case "S":
 			xAxisShift = 1;
+			break;
+		case "W":
+			yAxisShift = -1;
+			break;
+		case "E":
+			yAxisShift = 1;
+			break;
 		}
 		for (int i=0; i < numberOfCards; i++)
 		{
@@ -242,16 +243,16 @@ public class LivingRoom
 		switch (direction)
 		{
 		case "N":
-			yAxisShift = -1;
-			break;
-		case "S":
-			yAxisShift = 1;
-			break;
-		case "W":
 			xAxisShift = -1;
 			break;
-		case "E":
+		case "S":
 			xAxisShift = 1;
+			break;
+		case "W":
+			yAxisShift = -1;
+			break;
+		case "E":
+			yAxisShift = 1;
 		}
 		for (int i=0; i < numberOfCards; i++)
 		{

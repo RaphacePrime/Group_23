@@ -39,6 +39,7 @@ public class Game
 		generateCards();//calling function to generate the 122 cards
 		createPlayers();
 		setPersonalGoal();//calling the function to pick the personal goals
+		System.out.println("");
 		System.out.print("Press enter to randomly decide who get the chair and starts to play....");
 		Scanner sc= new Scanner(System.in);
 		sc.nextLine();
@@ -47,6 +48,7 @@ public class Game
 		this.players.get(this.index_players).setChair();//setting the chair to the player extracted randomly
 		System.out.println("The player that recive the chair is "+players.get(this.index_players).getName()+"!!!");
 		this.active_player=this.players.get(index_players);//setting the active player
+		System.out.println("");
 		System.out.print("Press enter to extract 2 Common Goals....");
 		sc.reset();
 		sc.nextLine();
@@ -84,6 +86,7 @@ public class Game
 		boolean exit=false;//variable for the last turns of players
 		while(control)
 		{
+			System.out.println("");
 			System.out.println(this.active_player.getName()+"'s turn");
 			System.out.println("Select a option in the MENU': ");
 			System.out.println("1)Show the LIVING ROOM");
@@ -150,20 +153,23 @@ public class Game
 					{
 						exit=true;
 					}
+					System.out.println("");
 					savePlayer();//saving the modification added to active_player
-					System.out.println(this.active_player.getName()+"has ended his turn...");
+					System.out.println(this.active_player.getName()+" has ended his turn...");
 					nextPlayer();//switching active_player to next Player in array player
 					System.out.println("The next player is "+this.active_player.getName());
 					if(this.active_player.getChair()==true && exit==true)
 					{
 						control=false;//exit the game if the next player has the chair and someone completed the library
 					}
+					
 					this.living_room.reset();//if the living room is nearly empty, it resets
 					break;
 				default:
 					System.out.println("Choose one of the options in the menù!");
 					break;
 			}
+			System.out.println("");
 			System.out.println("Press ENTER key to continue...");
 			sc.nextLine();
 		}
@@ -201,6 +207,8 @@ public class Game
      */
 	public void chooseCard()
 	{
+		System.out.println("");
+		this.living_room.output();
 		// coordinates, direction, number of cards
 		ArrayList<Card> chosen = new ArrayList<Card>();//list for the chosen cards
 		Scanner sc=new Scanner(System.in);
@@ -214,11 +222,12 @@ public class Game
 			System.out.println("Insert y coordinate of first card: ");
 			String sy=sc.nextLine(); int y=Integer.parseInt(sy);
 			System.out.println("Insert the direction of the next cards(N-E-S-W): ");
-			String direction=sc.nextLine();
+			String direction=sc.nextLine().toUpperCase();
 			while(!direction.equals("N")&&!direction.equals("S")&&!direction.equals("W")&&!direction.equals("E"))
 			{
 				System.out.println("You must choose N or E or S or W");
-				direction=sc.nextLine();						
+				direction=sc.nextLine();	
+				direction.toUpperCase();
 			}
 			System.out.print(this.active_player.getName()+", insert the amount of cards you want to pick(1,2,3) :");
 			int n_ofcards=scint.nextInt();//asking the player how many cards he want to pick
@@ -227,6 +236,7 @@ public class Game
 				System.out.print("You must select a number between 1 and 3: ");
 				n_ofcards=scint.nextInt();
 			}
+			//this.living_room.controlChosenCards(x,y,direction, n_ofcards)
 			if(this.living_room.controlChosenCards(x,y,direction, n_ofcards))//if the control in livingroom permits picking the cards, they get removed from the table
 			{
 				control=true;
@@ -242,7 +252,7 @@ public class Game
 			}
 			else//user have to input again
 			{
-				System.out.println("Cards must be in order! Enter again the coordinates");
+				System.out.println("You can't select these cards, try again!");
 			}
 		}
 	}
@@ -274,6 +284,7 @@ public class Game
      */
 	public void setPersonalGoal()//set 1 personal goal for each player
 	{
+		System.out.println("");
 		System.out.println("Press ENTER to extract Personal Goals...");
 		Scanner sc= new Scanner(System.in);
 		sc.nextLine();
@@ -302,11 +313,12 @@ public class Game
 			players.get(y).setPersonalGoal(generated_ids.get(y));//setting the personal goal to each player
 			System.out.println(players.get(y).getName()+"'s Personal Goal :");
 			players.get(y).getPersonalGoal().output();
+			System.out.println("");
 			System.out.print("Press ENTER key to continue....");
 			sc.nextLine();
 		}
-		System.out.print("Press ENTER key to continue....");
-		sc.nextLine();
+		//System.out.print("Press ENTER key to continue....");
+		//sc.nextLine();
 	}
 	
 	/**
@@ -326,6 +338,7 @@ public class Game
 				id=i;
 			}
 		}
+		System.out.println("");
 		System.out.print("Press ENTER to continue"); sc.nextLine();
 		System.out.println("The WINNER is "+players.get(id).getName()+"!!!");
 	}
@@ -342,7 +355,7 @@ public class Game
 			c1 = random.nextInt(12+0)+1; //extracting number between 1-12 to decide which common goals are extracted
 			c2 = random.nextInt(12+0)+1;
 		}while(c1==c2);
-		System.out.println("CG extracted are: Goal number "+c1+" and Goal number "+c2);
+		//System.out.println("CG extracted are: Goal number "+c1+" and Goal number "+c2);
 		int index_commongoals=0;
 		if(c1==1||c2==1) //creating 2 different commongoals and 
 		{

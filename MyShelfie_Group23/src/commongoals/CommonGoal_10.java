@@ -27,13 +27,18 @@ public class CommonGoal_10 extends CommonGoal{
 			
 			while(!completed && x<4) {
 				
-				completed = true;
-				colorFirstCard = matrix[x][y].getColor();
+				if(matrix[x][y] != null && matrix[x][y+2] != null && matrix[x+1][y+1] != null 
+						&& matrix[x+2][y] != null && matrix[x+2][y+2] != null) {
 				
-				if(matrix[x][y+2].getColor() != colorFirstCard || matrix[x+1][y+1].getColor() != colorFirstCard 
-						|| matrix[x+2][y].getColor() != colorFirstCard || matrix[x+2][y+2].getColor() != colorFirstCard)
-				{
-					completed = false;
+					completed = true;
+					colorFirstCard = matrix[x][y].getColor();
+					
+					if(matrix[x][y+2].getColor() != colorFirstCard || matrix[x+1][y+1].getColor() != colorFirstCard 
+							|| matrix[x+2][y].getColor() != colorFirstCard || matrix[x+2][y+2].getColor() != colorFirstCard)
+					{
+						completed = false;
+					}
+				
 				}
 				
 				x++;
