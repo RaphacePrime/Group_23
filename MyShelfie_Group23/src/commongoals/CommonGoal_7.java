@@ -18,7 +18,7 @@ public class CommonGoal_7 extends CommonGoal {
 
 			for (int j = 0; j < matrix[i].length - 1; j++) {
 
-				if (matrix[i][j].getColor().equals(matrix[i + 1][j].getColor())
+				if (matrix[i][j].getColor() != null && matrix[i][j].getColor().equals(matrix[i + 1][j].getColor())
 						&& matrix[i][j + 1].getColor().equals(matrix[i][j].getColor())
 						&& matrix[i + 1][j + 1].getColor().equals(matrix[i][j].getColor())) {
 
