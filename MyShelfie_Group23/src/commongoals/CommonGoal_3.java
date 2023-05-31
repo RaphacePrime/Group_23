@@ -22,16 +22,17 @@ public class CommonGoal_3 extends CommonGoal{
 	@Override
 	public boolean checkGoal(Player player) {
 		Card[][] matrix = player.getLibrary().getMatrix();
-		if (matrix[0][0].getColor() == null) {
+		if (matrix[0][0].getColor() == null || matrix[0][4].getColor() == null || 
+			matrix[5][0].getColor() == null || matrix[5][4].getColor() == null) {
 			return false;
 		}
-		if (matrix[0][0].getColor() != matrix[0][4].getColor()) {
+		if (!matrix[0][0].getColor().equals(matrix[0][4].getColor())) {
 			return false;
 		}
-		else if (matrix[5][0].getColor() != matrix[5][4].getColor()) {
+		else if (!matrix[0][4].getColor().equals(matrix[5][0].getColor())) {
 			return false;
 		}
-		else if (matrix[0][0].getColor() != matrix[5][0].getColor()) {
+		else if (!matrix[5][0].getColor().equals(matrix[5][4].getColor())) {
 			return false;
 		}
 		else {
