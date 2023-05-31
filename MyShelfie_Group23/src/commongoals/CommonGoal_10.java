@@ -33,8 +33,8 @@ public class CommonGoal_10 extends CommonGoal{
 					completed = true;
 					colorFirstCard = matrix[x][y].getColor();
 					
-					if(matrix[x][y+2].getColor() != colorFirstCard || matrix[x+1][y+1].getColor() != colorFirstCard 
-							|| matrix[x+2][y].getColor() != colorFirstCard || matrix[x+2][y+2].getColor() != colorFirstCard)
+					if(!matrix[x][y+2].getColor().equals(colorFirstCard) || !matrix[x+1][y+1].getColor().equals(colorFirstCard)
+							|| !matrix[x+2][y].getColor().equals(colorFirstCard)|| !matrix[x+2][y+2].getColor().equals(colorFirstCard))
 					{
 						completed = false;
 					}

@@ -29,7 +29,7 @@ public class CommonGoal_2 extends CommonGoal{
 				colorFirstCard = matrix[x][y].getColor();
 				
 				for(int i = 0; i < 5; i++) {	
-					if(matrix[x+i][y+(i*DiagonalCoeff)].getColor() == null || matrix[x+i][y+(i*DiagonalCoeff)].getColor() != colorFirstCard){
+					if(matrix[x+i][y+(i*DiagonalCoeff)].getColor() == null || !matrix[x+i][y+(i*DiagonalCoeff)].getColor().equals(colorFirstCard)){
 						completed = false;
 					}	
 				}
