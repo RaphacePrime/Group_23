@@ -291,20 +291,26 @@ public class Game
 					y = 0;
 				}
 			}while(y<=0 || y>=10);
-			System.out.println("Insert the direction of the next cards(N-E-S-W): ");
-			String direction=sc.nextLine().toUpperCase();
-			while(!direction.equals("N")&&!direction.equals("S")&&!direction.equals("W")&&!direction.equals("E"))
-			{
-				System.out.println("You must choose N or E or S or W");
-				direction=sc.nextLine();	
-				direction.toUpperCase();
-			}
 			System.out.print(this.active_player.getName()+", insert the amount of cards you want to pick(1,2,3) :");
 			int n_ofcards=scint.nextInt();//asking the player how many cards he want to pick
 			while(n_ofcards<1 || n_ofcards>3)
 			{
 				System.out.print("You must select a number between 1 and 3: ");
 				n_ofcards=scint.nextInt();
+			}
+			String direction;
+			if (n_ofcards == 1) {
+				direction = "N"; 
+			}
+			else {
+				System.out.println("Insert the direction of the next cards(N-E-S-W): ");
+				direction=sc.nextLine().toUpperCase();
+				while(!direction.equals("N")&&!direction.equals("S")&&!direction.equals("W")&&!direction.equals("E"))
+				{
+					System.out.println("You must choose N or E or S or W");
+					direction=sc.nextLine();	
+					direction.toUpperCase();
+				}
 			}
 			//this.living_room.controlChosenCards(x,y,direction, n_ofcards)
 			if(this.living_room.controlChosenCards(x,y,direction, n_ofcards))//if the control in livingroom permits picking the cards, they get removed from the table
@@ -314,6 +320,10 @@ public class Game
 				this.active_player.getLibrary().output();//output the player's library
 				System.out.print("Insert in which column you want to insert your "+chosen.size()+" new cards: ");
 				int column=scint.nextInt();//asking the player in which column he want to put the cards
+				while(column<1 || column>5) {
+					System.out.println("The column you chose doesn't exist, choose another one: ");
+					column=scint.nextInt();
+					}
 				while(this.active_player.getLibrary().insertInLibrary(chosen, column)==false)//while the player can't insert, the game ask another column
 				{
 					System.out.println("You can't insert in column "+column+", choose another one: ");
