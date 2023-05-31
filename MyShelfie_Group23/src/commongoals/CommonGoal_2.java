@@ -23,13 +23,13 @@ public class CommonGoal_2 extends CommonGoal{
 		String colorFirstCard; //color of the first card
 		
 		do{
-			if(matrix[x][y] != null) {
+			if(matrix[x][y].getColor() != null) {
 			
 				completed = true;
 				colorFirstCard = matrix[x][y].getColor();
 				
 				for(int i = 0; i < 5; i++) {	
-					if(matrix[x+i][y+(i*DiagonalCoeff)] == null || matrix[x+i][y+(i*DiagonalCoeff)].getColor() != colorFirstCard){
+					if(matrix[x+i][y+(i*DiagonalCoeff)].getColor() == null || matrix[x+i][y+(i*DiagonalCoeff)].getColor() != colorFirstCard){
 						completed = false;
 					}	
 				}
