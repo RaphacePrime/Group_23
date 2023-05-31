@@ -105,7 +105,7 @@ public class Game
 				}catch(NumberFormatException e) {
 					choice = 0;
 				}
-			}while(choice<=0 || choice>=6);
+			}while(choice<=0 || choice>=7);
 			switch(choice)
 			{
 				case 1:
@@ -148,6 +148,7 @@ public class Game
 							int points_gained=this.common_goals[0].assignPoints();
 							System.out.println(this.active_player.getName()+" has completed the Common Goal 1 and gained "+points_gained);
 							this.active_player.addPoints(points_gained);
+							this.active_player.setCheckCommonGoals(0);
 						}
 					}
 					if(this.active_player.getCheckCommonGoals(1)==false)//if the player hasn't completed the goal yet, control the library
@@ -157,6 +158,7 @@ public class Game
 							int points_gained=this.common_goals[1].assignPoints();
 							System.out.println(this.active_player.getName()+" has completed the Common Goal 2 and gained "+points_gained);
 							this.active_player.addPoints(points_gained);
+							this.active_player.setCheckCommonGoals(1);
 						}
 					}
 					if(this.active_player.getLibrary().checkFullness())//check if the library is full for end the game
@@ -165,6 +167,7 @@ public class Game
 						if(!point_assigned) 
 						{
 							this.active_player.addPoints(1);
+							point_assigned=true;
 						}
 					}
 					System.out.println("");
@@ -178,6 +181,33 @@ public class Game
 					}
 					
 					this.living_room.reset();//if the living room is nearly empty, it resets
+					break;
+				case 6:
+					System.out.println("SUDO mode:");
+					Card[][] matrix2= new Card[6][5];
+					for(int i=0; i<6; i++)
+					{
+						for(int y=0; y<5; y++)
+						{
+							String color;
+							System.out.print("Insert "+i+", "+y+" :");
+							color=sc.nextLine();
+							while(!color.equals("green") && !color.equals("white") && !color.equals("pink") && !color.equals("cyan") && !color.equals("blue") &&!color.equals("yellow") && !color.equals("null") && color!=null)
+							{
+								System.out.print("Insert "+i+", "+y+" :");
+								color=sc.nextLine();
+							}
+							if(color.equals("null") || color==null)
+							{
+								matrix2[i][y]=new Card();
+							}
+							else
+							{
+								matrix2[i][y]=new Card(color,1);
+							}
+						}
+					}
+					this.active_player.getLibrary().setMatrix(matrix2);
 					break;
 				default:
 					System.out.println("Choose one of the options in the menù!");
@@ -370,8 +400,12 @@ public class Game
 		Scanner sc= new Scanner(System.in);
 		for(int i=0; i<this.number_of_players; i++)
 		{
-			int end_points= AdjacentItemTiles.CheckAdjacentItemTiles(this.active_player.getLibrary().getMatrix());
-			this.active_player.addPoints(end_points);
+			this.players.get(i).getPersonalGoal().controlGoal(this.players.get(i).getLibrary());
+			int personalgoal_point=this.players.get(i).getPersonalGoal().GetPoints();
+			int end_points= AdjacentItemTiles.CheckAdjacentItemTiles(this.players.get(i).getLibrary().getMatrix());
+			this.players.get(i).addPoints(personalgoal_point);
+			this.players.get(i).addPoints(end_points);
+			System.out.println("PG points: "+personalgoal_point+", End points: "+end_points);
 			System.out.println(players.get(i).getName()+" totalized "+players.get(i).getPoints()+" points");
 			if(i==0) {max=players.get(i).getPoints();}
 			if(max<players.get(i).getPoints())

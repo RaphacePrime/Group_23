@@ -18,16 +18,20 @@ public class CommonGoal_7 extends CommonGoal {
 
 			for (int j = 0; j < matrix[i].length - 1; j++) {
 
-				if (matrix[i][j].getColor() != null && matrix[i][j].getColor().equals(matrix[i + 1][j].getColor())
-						&& matrix[i][j + 1].getColor().equals(matrix[i][j].getColor())
-						&& matrix[i + 1][j + 1].getColor().equals(matrix[i][j].getColor())) {
+				if (matrix[i][j].getColor() != null && matrix[i][j + 1].getColor()!= null && matrix[i + 1][j + 1].getColor()!=null) 
+				{
+					if (matrix[i][j].getColor().equals(matrix[i + 1][j].getColor())
+							&& matrix[i][j + 1].getColor().equals(matrix[i][j].getColor())
+							&& matrix[i + 1][j + 1].getColor().equals(matrix[i][j].getColor())) 
+					{
+						count++;
+						j++;
+					}
 
-					count++;
-					j++;
 				}
 			}
 		}
-		//System.out.println("Count: "+count);
+		// System.out.println("Count: "+count);
 		if (count >= 2) {
 
 			return true;
@@ -41,7 +45,8 @@ public class CommonGoal_7 extends CommonGoal {
 	@Override
 	public void output() {
 
-		System.out.println("Two groups each containing 4 titles of the same type in a 2x2 square. The titles of one square can be different from those of the other square.");
+		System.out.println(
+				"Two groups each containing 4 titles of the same type in a 2x2 square. The titles of one square can be different from those of the other square.");
 
 	}
 
