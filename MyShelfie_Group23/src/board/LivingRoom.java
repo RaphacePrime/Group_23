@@ -113,7 +113,7 @@ public class LivingRoom
 					if(tileColor.equals("yellow")) {
 						System.out.print("\u001B[33m" + "# " + "\u001B[0m");
 					}else if(tileColor.equals("pink")) {
-						System.out.print("\u001B[31m" + "# " + "\u001B[0m");
+						System.out.print("\u001B[35m" + "# " + "\u001B[0m");
 					}else if(tileColor.equals("blue")) {
 						System.out.print("\u001B[34m" + "# " + "\u001B[0m");
 					}else if(tileColor.equals("green")) {

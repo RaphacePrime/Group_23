@@ -158,7 +158,7 @@ public class PersonalGoal
 					if(matrix[i][j].equals("yellow")) {
 						System.out.print("\u001B[33m" + "# " + "\u001B[0m");
 					}else if(matrix[i][j].equals("pink")) {
-						System.out.print("\u001B[31m" + "# " + "\u001B[0m");
+						System.out.print("\u001B[35m" + "# " + "\u001B[0m");
 					}else if(matrix[i][j].equals("blue")) {
 						System.out.print("\u001B[34m" + "# " + "\u001B[0m");
 					}else if(matrix[i][j].equals("green")) {

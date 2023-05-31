@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import board.Card;
 import board.LivingRoomTile;
+import java.util.List;
 
 public class Library {
 	
@@ -111,7 +112,7 @@ public class Library {
                 }else if(tileColor.equals("yellow")) {
 					System.out.print("\u001B[33m" + "#  " + "\u001B[0m");
 				}else if(tileColor.equals("pink")) {
-					System.out.print("\u001B[31m" + "#  " + "\u001B[0m");
+					System.out.print("\u001B[35m" + "#  " + "\u001B[0m");
 				}else if(tileColor.equals("blue")) {
 					System.out.print("\u001B[34m" + "#  " + "\u001B[0m");
 				}else if(tileColor.equals("green")) {
@@ -134,6 +135,7 @@ public class Library {
 	public void setMatrix(Card matrix[][]) {
 		this.matrix = matrix;
 	}
+	
 }
 
 
