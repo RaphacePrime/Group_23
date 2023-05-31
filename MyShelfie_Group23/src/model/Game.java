@@ -82,6 +82,7 @@ public class Game
 	public void turn()
 	{
 		int index_players=0;//variable to manage the turns
+		boolean point_assigned=false;
 		Scanner sc=new Scanner(System.in);
 		boolean control=true;
 		boolean exit=false;//variable for the last turns of players
@@ -161,6 +162,10 @@ public class Game
 					if(this.active_player.getLibrary().checkFullness())//check if the library is full for end the game
 					{
 						exit=true;
+						if(!point_assigned) 
+						{
+							this.active_player.addPoints(1);
+						}
 					}
 					System.out.println("");
 					savePlayer();//saving the modification added to active_player
@@ -365,6 +370,8 @@ public class Game
 		Scanner sc= new Scanner(System.in);
 		for(int i=0; i<this.number_of_players; i++)
 		{
+			int end_points= AdjacentItemTiles.CheckAdjacentItemTiles(this.active_player.getLibrary().getMatrix());
+			this.active_player.addPoints(end_points);
 			System.out.println(players.get(i).getName()+" totalized "+players.get(i).getPoints()+" points");
 			if(i==0) {max=players.get(i).getPoints();}
 			if(max<players.get(i).getPoints())
