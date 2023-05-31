@@ -25,13 +25,13 @@ public class CommonGoal_3 extends CommonGoal{
 		if (matrix[0][0].getColor() == null) {
 			return false;
 		}
-		if (matrix[0][0].getColor() != matrix[0][5].getColor()) {
+		if (matrix[0][0].getColor() != matrix[0][4].getColor()) {
 			return false;
 		}
-		else if (matrix[6][0].getColor() != matrix[6][5].getColor()) {
+		else if (matrix[5][0].getColor() != matrix[5][4].getColor()) {
 			return false;
 		}
-		else if (matrix[0][0].getColor() != matrix[6][0].getColor()) {
+		else if (matrix[0][0].getColor() != matrix[5][0].getColor()) {
 			return false;
 		}
 		else {

@@ -53,10 +53,10 @@ public class CommonGoal_12 extends CommonGoal{
 	 */
 	@Override
 	public void output() {
-		System.out.println("Five columns of increasing or decreasing \r\n"
-				+ "height. Starting from the first column on \r\n"
-				+ "the left or on the right, each next column \r\n"
-				+ "must be made of exactly one more card. \r\n"
+		System.out.println("Five columns of increasing or decreasing "
+				+ "height. Starting from the first column on "
+				+ "the left or on the right, each next column "
+				+ "must be made of exactly one more card. "
 				+ "Cards can be of any colour.");		
 	}
 
