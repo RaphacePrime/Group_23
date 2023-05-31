@@ -34,33 +34,45 @@ public class CommonGoal_5 extends CommonGoal {
      */
     @Override
     public boolean checkGoal(Player player) {
-        Card[][] matrix = player.getLibrary().getMatrix();
+        Card[][] matrix2 = player.getLibrary().getMatrix();
+        String[][] matrix= new String[6][5];
+        for(int i=0; i<6; i++)
+        {
+        	for(int y=0; y<5; y++)
+        	{
+        		if(matrix2[i][y].getColor()==null)
+        		{
+        			matrix[i][y]="null";
+        		}
+        		matrix[i][y]=matrix2[i][y].getColor();
+        	}
+        }
         int count = 0; // Counter for the found groups
-
+        
         // Scan the rows
         for (int i = 0; i < matrix.length; i++) {
             // Scan the columns
             for (int j = 0; j < matrix[i].length; j++) {
-                String current = matrix[i][j].getColor();
+                String current = matrix[i][j];
 
                 // Check if there are four equal strings in the same row
-                if (j + 3 < matrix[i].length && current!=null && current.equals(matrix[i][j + 1].getColor()) && current.equals(matrix[i][j + 2].getColor()) && current.equals(matrix[i][j + 3].getColor())) {
+                if (j + 3 < matrix[i].length && current!="null" && current.equals(matrix[i][j + 1]) && current.equals(matrix[i][j + 2]) && current.equals(matrix[i][j + 3])) {
                     count++;
                     // Set the strings in the group to null
-                    matrix[i][j].setColor(null);
-                    matrix[i][j + 1].setColor(null);
-                    matrix[i][j + 2].setColor(null);
-                    matrix[i][j + 3].setColor(null);
+                    matrix[i][j]="null";
+                    matrix[i][j + 1]="null";
+                    matrix[i][j + 2]="null";
+                    matrix[i][j + 3]="null";
                 }
 
                 // Check if there are four equal strings in the same column
-                if (i + 3 < matrix.length && current!=null && current.equals(matrix[i + 1][j].getColor()) && current.equals(matrix[i + 2][j].getColor()) && current.equals(matrix[i + 3][j].getColor())) {
+                if (i + 3 < matrix.length && current!="null" && current.equals(matrix[i + 1][j]) && current.equals(matrix[i + 2][j]) && current.equals(matrix[i + 3][j])) {
                     count++;
                     // Set the strings in the group to null
-                    matrix[i][j].setColor(null);
-                    matrix[i + 1][j].setColor(null);
-                    matrix[i + 2][j].setColor(null);
-                    matrix[i + 3][j].setColor(null);
+                    matrix[i][j]="null";
+                    matrix[i + 1][j]="null";
+                    matrix[i + 2][j]="null";
+                    matrix[i + 3][j]="null";
                 }
             }
         }
