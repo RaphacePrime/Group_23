@@ -77,7 +77,7 @@ public class LivingRoom
 				if (matrix[x][y].isOccupied())
 				{
 					int neighbours = hasNeighbours(x,y);
-					if (neighbours > 1)
+					if (neighbours > 0)
 					{
 						return false;
 					}
