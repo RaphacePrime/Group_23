@@ -311,23 +311,38 @@ public class Game
 				}
 			} while (y <= 0 || y >= 10);
 			int max = countMaxCardToImport(this.active_player.getLibrary());
-			if(max>3)
+			if (max > 3)
 			{
-				max=3;
+				max = 3;
 			}
-			System.out.print(this.active_player.getName() + ", insert the amount of cards you want to pick(max. "+max+") :");
-			int n_ofcards = scint.nextInt();// asking the player how many cards he want to pick
+			System.out.print(
+					this.active_player.getName() + ", insert the amount of cards you want to pick(max. " + max + ") :");
+			int n_ofcards;// asking the player how many cards he want to pick
+			String string_choice = sc.nextLine();
+			try
+			{
+				n_ofcards = Integer.parseInt(string_choice);
+			} catch (NumberFormatException e)
+			{
+				n_ofcards = 0;
+			}
 			while (n_ofcards < 1 || n_ofcards > max)
 			{
-				if(max==1)
+				if (max == 1)
 				{
 					System.out.print("Sorry, you can select only one card!");
-					n_ofcards=1;
-				}
-				else
+					n_ofcards = 1;
+				} else
 				{
-					System.out.print("You must select a number between 1 and "+max+": ");
-					n_ofcards = scint.nextInt();
+					System.out.print("You must select a number between 1 and " + max + ": ");
+					string_choice = sc.nextLine();
+					try
+					{
+						n_ofcards = Integer.parseInt(string_choice);
+					} catch (NumberFormatException e)
+					{
+						n_ofcards = 0;
+					}
 				}
 			}
 			String direction;
@@ -342,8 +357,8 @@ public class Game
 						&& !direction.equals("E"))
 				{
 					System.out.println("You must choose N or E or S or W");
-					direction = sc.nextLine();
-					direction.toUpperCase();
+					direction = sc.nextLine().toUpperCase();
+
 				}
 			}
 			// this.living_room.controlChosenCards(x,y,direction, n_ofcards)
@@ -356,12 +371,26 @@ public class Game
 																				// where
 				this.active_player.getLibrary().output();// output the player's library
 				System.out.print("Insert in which column you want to insert your " + chosen.size() + " new cards: ");
-				int column = scint.nextInt();// asking the player in which column he want to put the cards
-				while (column < 0 || column > 5)
+				String string_column = sc.nextLine();// asking the player in which column he want to put the cards
+				int column;
+				try
 				{
-					System.out.println(
-							"The column you chose doesn't exist, choose another one: ");
-					column = scint.nextInt();
+					column = Integer.parseInt(string_column);
+				} catch (NumberFormatException e)
+				{
+					column = 0;
+				}
+				while (column <= 0 || column > 5)
+				{
+					System.out.print("The column you chose doesn't exist, choose another one: ");
+					string_column = sc.nextLine();
+					try
+					{
+						column = Integer.parseInt(string_column);
+					} catch (NumberFormatException e)
+					{
+						column = 0;
+					}
 				}
 				while (this.active_player.getLibrary().insertInLibrary(chosen, column) == false)// while the player
 																								// can't insert, the
@@ -567,31 +596,30 @@ public class Game
 			index_commongoals++;
 		}
 	}
-	
+
 	public int countMaxCardToImport(Library lib)
 	{
-		int max=0;
-		Card[][] c= lib.getMatrix();
-		for(int ncol=0; ncol<5; ncol++)
+		int max = 0;
+		Card[][] c = lib.getMatrix();
+		for (int ncol = 0; ncol < 5; ncol++)
 		{
-			int count=0;
-			for(int nrig=0; nrig<6; nrig++)
+			int count = 0;
+			for (int nrig = 0; nrig < 6; nrig++)
 			{
-				if(c[nrig][ncol].getColor()==null)
+				if (c[nrig][ncol].getColor() == null)
 				{
 					count++;
 				}
 			}
-			if(ncol==0)
+			if (ncol == 0)
 			{
-				max=count;
-			}
-			else if(count>max)
+				max = count;
+			} else if (count > max)
 			{
-				max=count;
+				max = count;
 			}
 		}
 		return max;
-		
+
 	}
 }

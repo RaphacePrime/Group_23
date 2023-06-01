@@ -23,7 +23,7 @@ public class CommonGoal_5 extends CommonGoal {
      */
     @Override
     public void output() {
-        System.out.println("Four groups made by four cards of the same type");
+        System.out.println("Four groups made by four cards of the same type, on the same column or row");
     }
 
     /**
@@ -44,7 +44,11 @@ public class CommonGoal_5 extends CommonGoal {
         		{
         			matrix[i][y]="null";
         		}
-        		matrix[i][y]=matrix2[i][y].getColor();
+        		else
+        		{
+        			matrix[i][y]=matrix2[i][y].getColor();
+        		}
+        		
         	}
         }
         int count = 0; // Counter for the found groups
@@ -54,7 +58,12 @@ public class CommonGoal_5 extends CommonGoal {
             // Scan the columns
             for (int j = 0; j < matrix[i].length; j++) {
                 String current = matrix[i][j];
-
+                /*try {
+                	System.out.println("Row: "+current+matrix[i][j + 1]+matrix[i][j + 2]+matrix[i][j + 3]);
+                }catch(Exception e) {
+                	System.out.println(e);
+                }*/
+                
                 // Check if there are four equal strings in the same row
                 if (j + 3 < matrix[i].length && current!="null" && current.equals(matrix[i][j + 1]) && current.equals(matrix[i][j + 2]) && current.equals(matrix[i][j + 3])) {
                     count++;
@@ -77,6 +86,10 @@ public class CommonGoal_5 extends CommonGoal {
             }
         }
         //System.out.println("Number of groups: " + count);
-        return count >= 4;
+        if(count>=4)
+        {
+        	return true;
+        }
+        return false;
     }
 }

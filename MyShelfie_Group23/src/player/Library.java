@@ -70,20 +70,30 @@ public class Library {
 			}
 			else
 			{
-				System.out.println("Choose which card you want to insert: ");
+				System.out.print("Choose which card you want to insert: ");
 				int i=1;
 				for(Card c:chosen)
 				{
 					System.out.print(i+") "+c.getColor()+" ");
 					i++;
 				}
-				Scanner sc = new Scanner(System.in);
-				int input= sc.nextInt();
-				while(input<=0 && input>num_elements)
+				int input; Scanner sc = new Scanner(System.in);
+				do
 				{
-					System.out.println("You have to insert a valid option!");
-					input=sc.nextInt();
-				}
+					String string_choice = sc.nextLine();
+					try
+					{
+						input = Integer.parseInt(string_choice);
+					} catch (NumberFormatException e)
+					{
+						input = 0;
+					}
+					if(input <= 0 || input > num_elements)
+					{
+						System.out.print("Error, insert again which card you want to insert: ");
+					}
+				} while (input <= 0 || input > num_elements);
+
 				for(int y=5; y>=0; y--)
 				{
 					if(matrix[y][column].getColor()==null || matrix[y][column].getColor().equals("N"))
