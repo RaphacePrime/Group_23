@@ -3,13 +3,25 @@ package commongoals;
 import board.Card;
 import player.Player;
 
+/**
+ * Common goal 10: Checks if there are five cards of the same colour forming an X
+ *
+ */
 public class CommonGoal_10 extends CommonGoal{
 
+	/**
+	 * Constructor of CommonGoal_10 
+	 * @param id
+	 */
 	public CommonGoal_10(int id) {
 		super(id);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @param player The player to check
+	 * @return returns true if the common goal is completed 
+	 */
 	@Override
 	public boolean checkGoal(Player player) {
 		
@@ -50,6 +62,9 @@ public class CommonGoal_10 extends CommonGoal{
 		return completed;
 	}
 
+	/**
+	 * Prints in the console the description of the common goal
+	 */
 	@Override
 	public void output() {
 		System.out.println("Five cards of the same colour forming an X");

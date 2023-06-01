@@ -3,12 +3,26 @@ package commongoals;
 import board.Card;
 import player.Player;
 
+/** 
+ * Common Goal 2: Checks if there are five cards of the same colour forming a diagonal.
+ *
+ */
 public class CommonGoal_2 extends CommonGoal{
 
+	/**
+	 * Constructor of CommonGoal_2
+	 * @param id 
+	 */
 	public CommonGoal_2(int id) {
 		super(id);
 	}
 
+	/**
+	 * Checks if the player has completed the common goal 
+	 * 
+	 * @param player The player to check
+	 * @return returns true if the common goal is completed 
+	 */
 	@Override
 	public boolean checkGoal(Player player) {
 		
@@ -51,6 +65,9 @@ public class CommonGoal_2 extends CommonGoal{
 		return completed;
 	}
 
+	/**
+	 * Prints in the console the description of the common goal
+	 */
 	@Override
 	public void output() {
 		

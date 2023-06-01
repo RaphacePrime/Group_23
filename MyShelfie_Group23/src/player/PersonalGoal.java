@@ -7,6 +7,10 @@ import java.util.Scanner;
 
 import board.Card;
 
+/**
+ * Creates 
+ *
+ */
 public class PersonalGoal 
 {
 	
@@ -20,7 +24,12 @@ public class PersonalGoal
 	
 	private int[] score = {0,1,2,4,6,9,12}; //Points a player gets by completing the goal
 	
- 
+	/**
+	 * Constructor of the class Personal Goal
+	 * 
+	 * @param id The id of the personal goal
+	 * @throws FileNotFoundException if the file is not found 
+	 */
 	public PersonalGoal (int id) throws FileNotFoundException
 	{
 		this.id = id;
@@ -30,8 +39,12 @@ public class PersonalGoal
 		points = 0;
 	}
 	
-	//Calculates the points made
 	
+	/**
+	 * Calculates the points made
+	 * 
+	 * @param lib the library to check
+	 */
 	public void controlGoal (Library lib)
 	{
 		Card[][] PlayerMatrix = lib.getMatrix();	//Matrix of the library of the player
@@ -56,14 +69,19 @@ public class PersonalGoal
 		return;
 	}
 	
-	//This function returns the points (To calculate the points, use the function controlGoal)
-	
+	/**
+	 * 
+	 * @return the points
+	 */
 	public int GetPoints() {
 		return this.points;
 	}
 	
-	//This function reads the file and creates a list of string out of it
-	
+	/**
+	 * Reads the file and creates a list of string out of it
+	 * 
+	 * @throws FileNotFoundException if the file is not found 
+	 */
 	public void readFile() throws FileNotFoundException {
 		
 		File f = new File("./resources/Personal_Goals.txt");
@@ -82,8 +100,11 @@ public class PersonalGoal
 		
 	}
 	
-	//This function ceates the goal from the file Personal_Goals.txt
-	
+	/**
+	 * Creates the goal from the file with the corresponding ID
+	 * 
+	 * @throws FileNotFoundException if the file is not found
+	 */
 	private void createGoal() throws FileNotFoundException {
 		
 		readFile();
@@ -114,32 +135,10 @@ public class PersonalGoal
 		
 	}
 	
-	/*
-	//Test class PersonalGoal
-	 
-	public String toString() {
-		
-		String s = "";
-		for(int x=0; x <= 5; x++) {
-			
-			for(int y =0; y <= 6; y++) {
-				
-				if(matrix[x][y] != null){
-					s = s + "x: " +  x + ", y: " + y + ", color: " + matrix[x][y] + "\n";
-					
-				}
-				
-			}
-			
-		}
-		return s;
-	}
-	
-	*/
-	
-	
-	//Grafic rapresentation of a goal
 
+	/**
+	 * Grafic rapresentation of a goal
+	 */
 	public void output () 
 	{
 		
