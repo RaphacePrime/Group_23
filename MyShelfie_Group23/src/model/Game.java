@@ -72,6 +72,11 @@ public class Game
 		{
 			System.out.print("Insert Player " + (i + 1) + " name: ");
 			String name = sc.nextLine();
+			while(name.equals(""))
+			{
+				System.out.print("You should have a name!: ");
+				name = sc.nextLine();
+			}
 			Player p = new Player(name, i);
 			this.players.add(p);// adding the player created in the arrayList
 		}
@@ -110,7 +115,7 @@ public class Game
 				{
 					choice = 0;
 				}
-			} while (choice <= 0 || choice >= 7);
+			} while (choice <= 0 || choice >= 6);
 			switch (choice)
 			{
 			case 1:
@@ -194,7 +199,7 @@ public class Game
 
 				this.living_room.reset();// if the living room is nearly empty, it resets
 				break;
-			case 6:
+			/*case 6: //SUDO MODE, for enable it, you need to eliminate the comment on case 6, and on line 118 you need to put 7 in the while instead of 6
 				System.out.println("SUDO mode:");
 				Card[][] matrix2 = new Card[6][5];
 				for (int i = 0; i < 6; i++)
@@ -221,7 +226,7 @@ public class Game
 					}
 				}
 				this.active_player.getLibrary().setMatrix(matrix2);
-				break;
+				break;*/  
 			default:
 				System.out.println("Choose one of the options in the menù!");
 				break;
@@ -596,7 +601,11 @@ public class Game
 			index_commongoals++;
 		}
 	}
-
+	
+	/**
+	 * Sets the common goals for the game by randomly selecting two common goals.
+	 * @param lib the library that you want to control
+	 */
 	public int countMaxCardToImport(Library lib)
 	{
 		int max = 0;

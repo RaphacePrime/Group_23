@@ -8,8 +8,8 @@ import java.util.Scanner;
 import board.Card;
 
 /**
- * Creates 
- *
+ * The PersonalGoal class represents a personal goal in the game.
+ * It manages the creation, control, and scoring of personal goals.
  */
 public class PersonalGoal 
 {

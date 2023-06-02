@@ -2,6 +2,10 @@ package player;
 
 import java.io.FileNotFoundException;
 
+/**
+ * The Player class represents a player in the game.
+ * It manages the player's information, such as name, points, library, and personal goal.
+ */
 public class Player {
 	
 	private String name;
