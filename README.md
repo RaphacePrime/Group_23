@@ -18,7 +18,7 @@ This is the project of Group 23 about "My Shelfie" for "Programmazione a oggetti
         * Show your Personal Goal
         * Choose the cards from the Living Room and insert in Library
     *   __You need to insert at least one card in your library to terminate your turn__
-    *   The game will terminate when a player fulfill their Library, after each player has the same number of turns
+    *   The game will terminate when a player fulfill his Library, after each player has the same number of turns
 
 ## Members
 Nome | Cognome | Email | Matricola
