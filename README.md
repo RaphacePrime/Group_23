@@ -4,6 +4,8 @@ This is the project of Group 23 about "My Shelfie" for "Programmazione a oggetti
 
 ## Instructions
 
+* First, if you don't know how the rules of the game, you will find the rulebook in this link
+  > https://www.craniocreations.it/prodotto/my-shelfie
 * To play a game, you need to open the Java project "MyShelife_Group23" with Eclipse or other IDE
 * Run the _"Main.java"_ as a Java project, then read these intruction to play:
     * Insert how many players want to play (minimum of 2 and maximum of 4)
